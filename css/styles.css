@@ -1,69 +1,82 @@
 body {
+    background-color: #1C1C1C;
+    color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
+    justify-content: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
 }
 
-#app {
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-header {
+#controls {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+}
+
+#controls button {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
 }
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
-    gap: 2px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
+    gap: 5px;
 }
 
 .grid-cell {
-    width: 100%;
-    padding-top: 100%;
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #ccc;
-}
-
-.grid-cell::after {
-    content: "";
-    display: block;
-    padding-top: 100%;
-}
-
-.grid-cell span {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid #333;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .portal {
-    background-color: #333;
-    animation: color-cycle 2s infinite;
+    background-color: gray;
+    border-top: 3px solid darkgray;
+    border-left: 3px solid darkgray;
+    border-right: 3px solid darkgray;
 }
 
-.starting-room {
-    border: 2px solid black;
+.portal::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400%;
+    animation: cycle-colors 5s linear infinite;
+    position: absolute;
+    bottom: 10px;
+}
+
+@keyframes cycle-colors {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.current {
+    background-color: black;
+}
+
+.player {
+    width: 10px;
+    height: 10px;
+    background-color: black;
 }
 
 .cleaned {
@@ -71,39 +84,5 @@ header {
 }
 
 .good-to-collect {
-    border: 2px solid gold;
-}
-
-@keyframes color-cycle {
-    0% { background-color: red; }
-    25% { background-color: yellow; }
-    50% { background-color: green; }
-    75% { background-color: blue; }
-    100% { background-color: purple; }
-}
-
-#controls {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-#controls button,
-#controls input {
-    padding: 10px;
-    margin: 5px;
-    font-size: 16px;
-    flex: 1 1 100px;
-    box-sizing: border-box;
-}
-
-@media (min-width: 600px) {
-    #controls {
-        flex-direction: row;
-    }
-
-    #controls button,
-    #controls input {
-        flex: 1 1 200px;
-    }
+    border: 2px solid yellow;
 }

@@ -7,38 +7,15 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="app">
-        <header>
-            <h1>Vault Hunters Map</h1>
-            <button onclick="resetMap()">Reset Map</button>
-        </header>
-        <main>
-            <div id="grid"></div>
-            <div id="controls">
-                <button onclick="move('north')">North</button>
-                <button onclick="move('south')">South</button>
-                <button onclick="move('east')">East</button>
-                <button onclick="move('west')">West</button>
-                <div>
-                    <label for="room-name">Room Name:</label>
-                    <input type="text" id="room-name" placeholder="Enter room name">
-                </div>
-                <div>
-                    <label for="room-color">Room Color:</label>
-                    <input type="color" id="room-color">
-                </div>
-                <button onclick="updateRoomDetails()">Update Room</button>
-                <div>
-                    <label for="cleaned-room">Cleaned:</label>
-                    <input type="checkbox" id="cleaned-room" onclick="toggleCleanedRoom()">
-                </div>
-                <div>
-                    <label for="good-to-collect">Good to Collect:</label>
-                    <input type="checkbox" id="good-to-collect" onclick="toggleGoodToCollect()">
-                </div>
-            </div>
-        </main>
+    <div id="controls">
+        <button onclick="move('north')">N</button>
+        <div>
+            <button onclick="move('west')">W</button>
+            <button onclick="move('east')">E</button>
+        </div>
+        <button onclick="move('south')">S</button>
     </div>
+    <div id="grid"></div>
     <script src="js/script.js"></script>
 </body>
 </html>
