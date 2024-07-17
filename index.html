@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vault Hunters Map</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Vault Hunters Map Editor</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="controls">
-        <button onclick="move('north')">N</button>
-        <div>
-            <button onclick="move('west')">W</button>
-            <button onclick="move('east')">E</button>
+    <div class="container">
+        <h1>Vault Hunters Map Editor</h1>
+        <div id="map" class="map">
+            <!-- Map grid and player dot will be dynamically generated here -->
         </div>
-        <button onclick="move('south')">S</button>
     </div>
-    <div id="grid"></div>
-    <script src="js/script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
