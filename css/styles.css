@@ -55,7 +55,7 @@ body {
 }
 
 .grid-cell.discovered {
-    background-color: #f0f0f0; /* Pale gray background for discovered rooms */
+   /* background-color: #f0f0f0; /* Pale gray background for discovered rooms */
     border: 3px solid red; /* Red border for discovered rooms */
 }
 
@@ -71,8 +71,8 @@ body {
 
 .portal::after {
     content: '';
-    width: 15px; /* Adjusted size for smaller rooms */
-    height: 30px; /* Adjusted size for smaller rooms */
+    width: 10px; /* Adjusted size for smaller rooms */
+    height: 20px; /* Adjusted size for smaller rooms */
     background: radial-gradient(270deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
     background-size: 400%;
     animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*/
