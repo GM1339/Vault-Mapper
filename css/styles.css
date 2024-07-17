@@ -37,15 +37,15 @@ body {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(21, 37.5px); /* Adjusted for 25% reduction */
-    grid-template-rows: repeat(21, 37.5px);    /* Adjusted for 25% reduction */
+    grid-template-columns: repeat(21, 37.5px); /* 25% reduction from 50px */
+    grid-template-rows: repeat(21, 37.5px);    /* 25% reduction from 50px */
     gap: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 60px; /* Adjust margin to accommodate controls */
 }
 
 .grid-cell {
-    width: 37.5px; /* Adjusted for 25% reduction */
-    height: 37.5px; /* Adjusted for 25% reduction */
+    width: 37.5px; /* 25% reduction from 50px */
+    height: 37.5px; /* 25% reduction from 50px */
     background-color: transparent;
     border: none; /* No initial border */
     display: flex;
@@ -55,7 +55,7 @@ body {
 }
 
 .grid-cell.discovered {
-    background-color: #f0f0f0; /* Pale gray background for discovered rooms */
+   /* background-color: #f0f0f0; /* Pale gray background for discovered rooms */
     border: 3px solid red; /* Red border for discovered rooms */
 }
 
@@ -73,15 +73,30 @@ body {
     content: '';
     width: 10px; /* Adjusted size for smaller rooms */
     height: 20px; /* Adjusted size for smaller rooms */
-    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet);
+    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
     background-size: 400%;
-    animation: cycle-colors 5s linear infinite;
+    animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*/
     position: absolute;
-    bottom: 4px; /* Adjusted position for smaller rooms */
+    bottom: 4px; /*GREG Adjusted position for smaller rooms */
     left: 50%;
     transform: translateX(-50%);
-    border: 3px solid black; /* Black border for the smaller rectangle */
+    border: 3px solid black; /* GREG Black border for the smaller rectangle */
 }
+
+
+
+/* edited by GREG with gpt snippet */
+@keyframes cycle-colors {
+    0% { background-color: red; }
+    14% { background-color: orange; }
+    28% { background-color: yellow; }
+    42% { background-color: green; }
+    57% { background-color: blue; }
+    71% { background-color: indigo; }
+    85% { background-color: violet; }
+    100% { background-color: red; }
+}
+
 
 .player {
     width: 15px; /* Adjusted size for smaller rooms */
@@ -90,8 +105,6 @@ body {
     border-radius: 50%; /* Circle shape */
     border: 3px solid black; /* 3px black border for the player */
 }
-
-
 
 input[type="checkbox"] {
     margin-left: 5px;
