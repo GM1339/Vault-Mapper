@@ -8,7 +8,10 @@ let completedRooms = {};
 
 // Initialize Grid
 function initializeGrid() {
-	@@ -15,20 +14,21 @@ function initializeGrid() {
+    grid.innerHTML = '';
+    for (let y = 0; y < vaultSize; y++) {
+        for (let x = 0; x < vaultSize; x++) {
+            let cell = document.createElement('div');
             cell.className = 'grid-cell';
             cell.dataset.x = x;
             cell.dataset.y = y;
@@ -29,7 +32,29 @@ function resetMap() {
 }
 
 // Prompt user to set portal facing direction
-	@@ -58,8 +58,8 @@ function setStartingRoom(direction) {
+function promptPortalFacing() {
+    let direction = prompt("Enter portal facing direction (north, south, east, west):").toLowerCase();
+    while (!['north', 'south', 'east', 'west'].includes(direction)) {
+        direction = prompt("Invalid direction. Enter portal facing direction (north, south, east, west):").toLowerCase();
+    }
+    portalFacing = direction;
+    setStartingRoom(direction);
+}
+
+// Set starting room based on portal facing direction
+function setStartingRoom(direction) {
+    let startingRoom;
+    switch (direction) {
+        case 'north':
+            startingRoom = { x: currentRoom.x, y: currentRoom.y - 1 };
+            break;
+        case 'south':
+            startingRoom = { x: currentRoom.x, y: currentRoom.y + 1 };
+            break;
+        case 'east':
+            startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
+            break;
+        case 'west':
             startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
             break;
     }
@@ -38,7 +63,11 @@ function resetMap() {
     markPlayerPosition(startingRoom.x, startingRoom.y);
 }
 
-	@@ -71,74 +71,3 @@ function move(direction) {
+// Function to move in the grid
+function move(direction) {
+    let previousRoom = { ...playerPosition };
+    switch (direction) {
+        case 'north':
             if (playerPosition.y > 0) playerPosition.y--;
             break;
         case 'south':
