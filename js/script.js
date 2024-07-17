@@ -118,7 +118,15 @@ function setStartingRoom(direction) {
 
     playerPosition = { ...startingRoom }; // Set player position to the starting room
 
-    roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false };
+    /*roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false };*/
+
+    if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
+        roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
+        document.getElementById('completion-checkbox').checked = false;
+    } else {
+        document.getElementById('completion-checkbox').checked = roomData[`${playerPosition.x},${playerPosition.y}`].completed;
+    }
+    
 
     markRoom(startingRoom.x, startingRoom.y);
 
