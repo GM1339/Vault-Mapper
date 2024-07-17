@@ -11,10 +11,17 @@ body {
 }
 
 #controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
+    align-items: flex-end;
+    z-index: 1;
+}
+
+#controls div {
+    margin-bottom: 10px;
 }
 
 #controls button {
@@ -30,16 +37,17 @@ body {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(10, 50px);
-    grid-template-rows: repeat(10, 50px);
+    grid-template-columns: repeat(20, 50px);
+    grid-template-rows: repeat(20, 50px);
     gap: 5px;
+    margin-bottom: 60px; /* Adjust margin to accommodate controls */
 }
 
 .grid-cell {
     width: 50px;
     height: 50px;
     background-color: transparent;
-    border: 1px solid #333;
+    border: 1px solid #ccc; /* Light gray border for room connections */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,9 +56,23 @@ body {
 
 .portal {
     background-color: gray;
-    border-top: 3px solid darkgray;
-    border-left: 3px solid darkgray;
-    border-right: 3px solid darkgray;
+    border: 3px solid darkgray;
+}
+
+.portal.north {
+    border-top: none;
+}
+
+.portal.east {
+    border-right: none;
+}
+
+.portal.south {
+    border-bottom: none;
+}
+
+.portal.west {
+    border-left: none;
 }
 
 .portal::after {
