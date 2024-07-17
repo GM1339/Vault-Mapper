@@ -11,10 +11,17 @@ body {
 }
 
 #controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
+    align-items: flex-end;
+    z-index: 1;
+}
+
+#controls div {
+    margin-bottom: 10px;
 }
 
 #controls button {
@@ -28,42 +35,99 @@ body {
     cursor: pointer;
 }
 
+/* Ensure North, South, East, West buttons match WASD layout */
+#controls > div:nth-child(1),
+#controls > div:nth-child(3) {
+    display: flex;
+    justify-content: center;
+}
+
+#controls > div:nth-child(2),
+#controls > div:nth-child(4) {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Undo and Redo buttons as sideways rectangles */
+#controls button.undo,
+#controls button.redo {
+    width: 60px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    padding: 5px; /* Adjust padding for text spacing */
+    font-size: 14px;
+}
+
+/* Center text inside Undo and Redo buttons */
+#controls button.undo {
+    transform: rotate(90deg);
+}
+
+#controls button.redo {
+    transform: rotate(-90deg);
+}
+
 #grid {
     display: grid;
-    grid-template-columns: repeat(21, 30px); /* Adjusted for 21x21 grid */
-    grid-template-rows: repeat(21, 30px); /* Adjusted for 21x21 grid */
-    gap: 5px;
-    justify-content: center; /* Center the grid horizontally */
-    align-items: center; /* Center the grid vertically */
+    grid-template-columns: repeat(21, 30px); /* Adjusted room size to 30px */
+    grid-template-rows: repeat(21, 30px); /* Adjusted room size to 30px */
+    gap: 3px; /* Reduced gap between rooms */
+    margin-bottom: 100px; /* Adjust margin to accommodate controls */
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 
 .grid-cell {
-    width: 30px;
-    height: 30px;
+    width: 30px; /* Adjusted room size to 30px */
+    height: 30px; /* Adjusted room size to 30px */
     background-color: transparent;
-    border: 1px solid #333;
+    border: none; /* No initial border */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
+.grid-cell.discovered {
+    background-color: #f0f0f0; /* Pale gray background for discovered rooms */
+    border: 3px solid red; /* Red border for discovered rooms */
+}
+
+.grid-cell.completed {
+    border-color: green !important; /* Green border for completed rooms */
+}
+
 .portal {
     background-color: gray;
-    border-top: 3px solid darkgray;
-    border-left: 3px solid darkgray;
-    border-right: 3px solid darkgray;
+    border: 3px solid darkgray;
+}
+
+.portal.north {
+    border-top: none;
+}
+
+.portal.east {
+    border-right: none;
+}
+
+.portal.south {
+    border-bottom: none;
+}
+
+.portal.west {
+    border-left: none;
 }
 
 .portal::after {
     content: '';
-    width: 20px;
-    height: 20px;
+    width: 15px; /* Adjusted size of portal indicator */
+    height: 15px; /* Adjusted size of portal indicator */
     background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
     background-size: 400%;
     animation: cycle-colors 5s linear infinite;
     position: absolute;
-    bottom: 10px;
+    bottom: 5px; /* Adjusted position of portal indicator */
 }
 
 @keyframes cycle-colors {
@@ -71,34 +135,31 @@ body {
     100% { background-position: 100% 50%; }
 }
 
-.current {
-    background-color: black;
-}
-
 .player {
-    width: 10px;
-    height: 10px;
+    width: 25px; /* Adjusted size of player dot */
+    height: 25px; /* Adjusted size of player dot */
     background-color: white;
-    border: 2px solid black; /* Added black 2px border */
-    border-radius: 50%; /* Ensure it's a circle */
-    position: absolute; /* Position relative to the grid cell */
-    z-index: 1; /* Ensure it's above other elements */
-}
-
-.cleaned {
-    border: 2px solid green;
-}
-
-.good-to-collect {
-    border: 2px solid yellow;
-}
-
-#completionToggle {
+    border: 2px solid black; /* Black border for player dot */
+    border-radius: 50%; /* Circle shape */
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Initially hidden */
 }
 
-#completionLabel {
-    color: red;
+.player.active {
+    display: block; /* Display only in the current room */
+}
+
+input[type="checkbox"] {
+    display: none; /* Hide default checkbox */
+}
+
+input[type="checkbox"] + label {
+    color: red; /* Default label color */
+}
+
+input[type="checkbox"]:checked + label {
+    color: green; /* Label color when checked */
 }
