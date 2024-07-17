@@ -20,19 +20,19 @@ body {
     grid-template-rows: repeat(21, 20px); /* Adjusted row height with spacing */
     gap: 5px; /* Spacing between squares */
     margin-top: 20px;
-    background-color: #333; /* Light gray background */
+    background-color: #eee; /* Light gray background */
     border: 1px solid #000; /* Black border */
 }
 
 .room {
-    background-color: #eee; /* Light gray background */
+    background-color: #333; /* Light gray background */
     border: 2px solid #000; /* Black 2px border */
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px; /* Make rooms 100% of their parent container's height */
-    width: 100px; /* Make rooms 100% of their parent container's width */
+    height: 50%; /* Make rooms 100% of their parent container's height */
+    width: 50%; /* Make rooms 100% of their parent container's width */
     margin: -2px; /* Adjust for the border size */
 }
 
