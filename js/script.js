@@ -15,7 +15,6 @@ function initializeGrid() {
             cell.className = 'grid-cell';
             cell.dataset.x = x;
             cell.dataset.y = y;
-            cell.innerHTML = `<span></span>`;
             grid.appendChild(cell);
         }
     }
@@ -59,6 +58,7 @@ function setStartingRoom(direction) {
             break;
     }
     roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false };
+    markRoom(currentRoom.x, currentRoom.y, true); // Mark Portal Room
     markRoom(startingRoom.x, startingRoom.y);
     markPlayerPosition(startingRoom.x, startingRoom.y);
 }
@@ -89,10 +89,14 @@ function move(direction) {
 }
 
 // Function to mark rooms
-function markRoom(x, y) {
+function markRoom(x, y, isPortal = false) {
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     cell.style.visibility = 'visible';
     cell.classList.add('discovered');
+    if (isPortal) {
+        cell.classList.add('portal');
+        cell.classList.add(portalFacing);
+    }
     if (completedRooms[`${x},${y}`]) {
         cell.classList.add('completed');
     }
