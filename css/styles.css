@@ -20,7 +20,7 @@ body {
     grid-template-rows: repeat(21, 20px); /* Adjusted row height with spacing */
     gap: 5px; /* Spacing between squares */
     margin-top: 20px;
-    background-color: #bbb; /* Light gray background */
+    background-color: #333; /* Light gray background */
     border: 1px solid #000; /* Black border */
 }
 
@@ -31,8 +31,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Make rooms 100% of their parent container's height */
-    width: 100%; /* Make rooms 100% of their parent container's width */
+    height: 75px; /* Make rooms 100% of their parent container's height */
+    width: 75px; /* Make rooms 100% of their parent container's width */
     margin: -2px; /* Adjust for the border size */
 }
 
