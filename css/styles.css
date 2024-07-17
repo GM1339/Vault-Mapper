@@ -52,7 +52,6 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    visibility: hidden; /* Hide cells initially */
 }
 
 .grid-cell.discovered {
