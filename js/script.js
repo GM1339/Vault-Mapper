@@ -163,39 +163,38 @@ function markPortalRoom(x, y, direction) {
 // Function to move in the grid -edit by GREG with gpt snippet 2
 
 function move(direction) {
-
     let previousRoom = { ...playerPosition };
 
     switch (direction) {
 
         case 'north':
-
             if (playerPosition.y > 0 && !(playerPosition.x === currentRoom.x && playerPosition.y - 1 === currentRoom.y)) playerPosition.y--;
-
             break;
 
         case 'south':
-
             if (playerPosition.y < vaultSize - 1 && !(playerPosition.x === currentRoom.x && playerPosition.y + 1 === currentRoom.y)) playerPosition.y++;
-
             break;
 
         case 'east':
-
             if (playerPosition.x < vaultSize - 1 && !(playerPosition.x + 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x++;
-
             break;
 
         case 'west':
-
             if (playerPosition.x > 0 && !(playerPosition.x - 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x--;
-
             break;
 
     }
     if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
         roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
     }
+
+
+/* added gpt snippet by GREG */
+        document.getElementById('completion-checkbox').checked = false;
+    } else {
+        document.getElementById('completion-checkbox').checked = roomData[`${playerPosition.x},${playerPosition.y}`].completed;
+}
+    
     markRoom(previousRoom.x, previousRoom.y);
     markPlayerPosition(playerPosition.x, playerPosition.y);
     updateCompletion();
