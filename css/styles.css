@@ -35,12 +35,54 @@ body {
     cursor: pointer;
 }
 
+/* Ensure North, South, East, West buttons match WASD layout */
+#controls > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+}
+
+#controls > div:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+}
+
+#controls > div:nth-child(3) {
+    display: flex;
+    justify-content: center;
+}
+
+#controls > div:nth-child(4) {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Undo and Redo buttons as sideways rectangles */
+#controls button.undo, #controls button.redo {
+    width: 60px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    padding: 5px; /* Adjust padding for text spacing */
+    font-size: 14px;
+}
+
+/* Center text inside Undo and Redo buttons */
+#controls button.undo {
+    transform: rotate(90deg);
+}
+
+#controls button.redo {
+    transform: rotate(-90deg);
+}
+
 #grid {
     display: grid;
     grid-template-columns: repeat(21, 50px);
     grid-template-rows: repeat(21, 50px);
     gap: 5px;
     margin-bottom: 60px; /* Adjust margin to accommodate controls */
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 
 .grid-cell {
