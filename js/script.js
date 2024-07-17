@@ -148,7 +148,7 @@ function markPortalRoom(x, y, direction) {
 
 function move(direction) {
 
-    let previousRoom = { ...playerPosition }; //GREG
+    let currentRoom = { ...playerPosition }; //GREG
 
     switch (direction) {
 
