@@ -1,5 +1,5 @@
 body {
-    background-color: #4986E7;
+    background-color: #1C1C1C;
     color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
@@ -35,59 +35,17 @@ body {
     cursor: pointer;
 }
 
-/* Ensure North, South, East, West buttons match WASD layout */
-#controls > div:nth-child(1) {
-    display: flex;
-    justify-content: center;
-}
-
-#controls > div:nth-child(2) {
-    display: flex;
-    justify-content: space-between;
-}
-
-#controls > div:nth-child(3) {
-    display: flex;
-    justify-content: center;
-}
-
-#controls > div:nth-child(4) {
-    display: flex;
-    justify-content: space-between;
-}
-
-/* Undo and Redo buttons as sideways rectangles */
-#controls button.undo, #controls button.redo {
-    width: 60px; /* Adjust width as needed */
-    height: 30px; /* Adjust height as needed */
-    padding: 5px; /* Adjust padding for text spacing */
-    font-size: 14px;
-}
-
-/* Center text inside Undo and Redo buttons */
-#controls button.undo {
-    transform: rotate(90deg);
-}
-
-#controls button.redo {
-    transform: rotate(-90deg);
-}
-
 #grid {
     display: grid;
-    grid-template-columns: repeat(21, 30px); /* Adjusted room size to 30px */
-    grid-template-rows: repeat(21, 30px); /* Adjusted room size to 30px */
-    gap: 3px; /* Reduced gap between rooms */
+    grid-template-columns: repeat(21, 50px);
+    grid-template-rows: repeat(21, 50px);
+    gap: 5px;
     margin-bottom: 60px; /* Adjust margin to accommodate controls */
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    left: 50%;
 }
 
 .grid-cell {
-    width: 30px; /* Adjusted room size to 30px */
-    height: 30px; /* Adjusted room size to 30px */
+    width: 50px;
+    height: 50px;
     background-color: transparent;
     border: none; /* No initial border */
     display: flex;
@@ -128,13 +86,13 @@ body {
 
 .portal::after {
     content: '';
-    width: 15px; /* Adjusted size of portal indicator */
-    height: 15px; /* Adjusted size of portal indicator */
+    width: 20px;
+    height: 20px;
     background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
     background-size: 400%;
     animation: cycle-colors 5s linear infinite;
     position: absolute;
-    bottom: 5px; /* Adjusted position of portal indicator */
+    bottom: 10px;
 }
 
 @keyframes cycle-colors {
@@ -143,8 +101,8 @@ body {
 }
 
 .player {
-    width: 15px; /* Adjusted size of player dot */
-    height: 15px; /* Adjusted size of player dot */
+    width: 20px;
+    height: 20px;
     background-color: white;
     border-radius: 50%; /* Circle shape */
 }
