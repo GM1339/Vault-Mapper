@@ -31,8 +31,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50%; /* Make rooms 100% of their parent container's height */
-    width: 50%; /* Make rooms 100% of their parent container's width */
+    height: 100%; /* Make rooms 100% of their parent container's height */
+    width: 100%; /* Make rooms 100% of their parent container's width */
     margin: -2px; /* Adjust for the border size */
 }
 
