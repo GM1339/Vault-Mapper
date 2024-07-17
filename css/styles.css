@@ -11,6 +11,7 @@ body {
 
 .container {
     text-align: center;
+    color: white; /* White text color */
 }
 
 .map {
@@ -30,5 +31,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 10px; /* Adjust font size */
+}
+
+.player {
+    width: 10px; /* Player dot size */
+    height: 10px; /* Player dot size */
+    border-radius: 50%;
+    background-color: white; /* White player dot */
+    position: absolute; /* Positioning relative to the map */
 }
