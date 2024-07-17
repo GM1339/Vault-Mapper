@@ -37,15 +37,15 @@ body {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(21, 50px);
-    grid-template-rows: repeat(21, 50px);
+    grid-template-columns: repeat(21, 37.5px); /* 25% reduction from 50px */
+    grid-template-rows: repeat(21, 37.5px);    /* 25% reduction from 50px */
     gap: 5px;
     margin-bottom: 60px; /* Adjust margin to accommodate controls */
 }
 
 .grid-cell {
-    width: 50px;
-    height: 50px;
+    width: 37.5px; /* 25% reduction from 50px */
+    height: 37.5px; /* 25% reduction from 50px */
     background-color: transparent;
     border: none; /* No initial border */
     display: flex;
@@ -55,7 +55,7 @@ body {
 }
 
 .grid-cell.discovered {
-    background-color: transparent; /* Pale gray background for discovered rooms */
+    background-color: #f0f0f0; /* Pale gray background for discovered rooms */
     border: 3px solid red; /* Red border for discovered rooms */
 }
 
@@ -65,20 +65,22 @@ body {
 
 .portal {
     background-color: gray;
-    border: 2px solid white;
+    border: 2px solid white; /* White border for the Portal Room */
     position: relative;
 }
 
 .portal::after {
     content: '';
-    width: 20px;
-    height: 40px;
+    width: 15px; /* Adjusted size for smaller rooms */
+    height: 15px; /* Adjusted size for smaller rooms */
     background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
     background-size: 400%;
     animation: cycle-colors 5s linear infinite;
-    border: 2px solid black;
     position: absolute;
-    bottom: 5px;
+    bottom: 5px; /* Adjusted position for smaller rooms */
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid black; /* Black border for the smaller rectangle */
 }
 
 @keyframes cycle-colors {
@@ -87,8 +89,8 @@ body {
 }
 
 .player {
-    width: 20px;
-    height: 20px;
+    width: 15px; /* Adjusted size for smaller rooms */
+    height: 15px; /* Adjusted size for smaller rooms */
     background-color: white;
     border-radius: 50%; /* Circle shape */
 }

@@ -1,6 +1,6 @@
 let grid = document.getElementById('grid');
 let currentRoom = { x: 10, y: 10 }; // Starting at the center for a 21x21 grid
-let playerPosition = { ...currentRoom }; // Start player at the center
+let playerPosition = { x: 10, y: 9 }; // Start player at the center but not in the Portal room
 let roomData = {};
 let vaultSize = 21; // Change grid size to 21x21
 let portalFacing = null;
@@ -15,28 +15,20 @@ function initializeGrid() {
             cell.className = 'grid-cell';
             cell.dataset.x = x;
             cell.dataset.y = y;
+            cell.innerHTML = `<span></span>`;
             grid.appendChild(cell);
         }
     }
-    setPortalRoom();
     promptPortalFacing();
 }
 
 // Reset Map
 function resetMap() {
     currentRoom = { x: Math.floor(vaultSize / 2), y: Math.floor(vaultSize / 2) };
-    playerPosition = { ...currentRoom };
+    playerPosition = { x: currentRoom.x, y: currentRoom.y - 1 }; // Adjust player start position
     roomData = {};
     completedRooms = {};
     initializeGrid();
-}
-
-// Set the Portal Room in the center of the grid
-function setPortalRoom() {
-    let portalRoom = { x: currentRoom.x, y: currentRoom.y };
-    let cell = grid.querySelector(`[data-x="${portalRoom.x}"][data-y="${portalRoom.y}"]`);
-    cell.classList.add('portal');
-    roomData[`${portalRoom.x},${portalRoom.y}`] = { type: 'portal', discovered: true, completed: false };
 }
 
 // Prompt user to set portal facing direction
@@ -69,6 +61,14 @@ function setStartingRoom(direction) {
     roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false };
     markRoom(startingRoom.x, startingRoom.y);
     markPlayerPosition(startingRoom.x, startingRoom.y);
+    markPortalRoom(currentRoom.x, currentRoom.y, direction);
+}
+
+// Function to mark portal room
+function markPortalRoom(x, y, direction) {
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    cell.classList.add('portal');
+    cell.classList.add(direction);
 }
 
 // Function to move in the grid
@@ -76,16 +76,16 @@ function move(direction) {
     let previousRoom = { ...playerPosition };
     switch (direction) {
         case 'north':
-            if (playerPosition.y > 0) playerPosition.y--;
+            if (playerPosition.y > 0 && !(playerPosition.x === currentRoom.x && playerPosition.y - 1 === currentRoom.y)) playerPosition.y--;
             break;
         case 'south':
-            if (playerPosition.y < vaultSize - 1) playerPosition.y++;
+            if (playerPosition.y < vaultSize - 1 && !(playerPosition.x === currentRoom.x && playerPosition.y + 1 === currentRoom.y)) playerPosition.y++;
             break;
         case 'east':
-            if (playerPosition.x < vaultSize - 1) playerPosition.x++;
+            if (playerPosition.x < vaultSize - 1 && !(playerPosition.x + 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x++;
             break;
         case 'west':
-            if (playerPosition.x > 0) playerPosition.x--;
+            if (playerPosition.x > 0 && !(playerPosition.x - 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x--;
             break;
     }
     if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
@@ -142,6 +142,8 @@ function updateCompletion() {
 
 // Initialize the map on load
 resetMap();
+
+
 
 document.addEventListener('keydown', (event) => {
     const key = event.key.toLowerCase();
