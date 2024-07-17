@@ -15,10 +15,10 @@ function initializeGrid() {
             cell.className = 'grid-cell';
             cell.dataset.x = x;
             cell.dataset.y = y;
-            cell.innerHTML = `<span></span>`;
             grid.appendChild(cell);
         }
     }
+    setPortalRoom();
     promptPortalFacing();
 }
 
@@ -29,6 +29,14 @@ function resetMap() {
     roomData = {};
     completedRooms = {};
     initializeGrid();
+}
+
+// Set the Portal Room in the center of the grid
+function setPortalRoom() {
+    let portalRoom = { x: currentRoom.x, y: currentRoom.y };
+    let cell = grid.querySelector(`[data-x="${portalRoom.x}"][data-y="${portalRoom.y}"]`);
+    cell.classList.add('portal');
+    roomData[`${portalRoom.x},${portalRoom.y}`] = { type: 'portal', discovered: true, completed: false };
 }
 
 // Prompt user to set portal facing direction

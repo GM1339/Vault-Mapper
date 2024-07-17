@@ -55,7 +55,7 @@ body {
 }
 
 .grid-cell.discovered {
-    background-color: #f0f0f0; /* Pale gray background for discovered rooms */
+    background-color: transparent; /* Pale gray background for discovered rooms */
     border: 3px solid red; /* Red border for discovered rooms */
 }
 
@@ -65,34 +65,20 @@ body {
 
 .portal {
     background-color: gray;
-    border: 3px solid darkgray;
-}
-
-.portal.north {
-    border-top: none;
-}
-
-.portal.east {
-    border-right: none;
-}
-
-.portal.south {
-    border-bottom: none;
-}
-
-.portal.west {
-    border-left: none;
+    border: 2px solid white;
+    position: relative;
 }
 
 .portal::after {
     content: '';
     width: 20px;
-    height: 20px;
+    height: 40px;
     background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
     background-size: 400%;
     animation: cycle-colors 5s linear infinite;
+    border: 2px solid black;
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
 }
 
 @keyframes cycle-colors {
