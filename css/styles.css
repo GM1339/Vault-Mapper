@@ -73,7 +73,7 @@ body {
     content: '';
     width: 10px; /* Adjusted size for smaller rooms */
     height: 20px; /* Adjusted size for smaller rooms */
-    background: radial-gradient(270deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
+    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
     background-size: 400%;
     animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*/
     position: absolute;
