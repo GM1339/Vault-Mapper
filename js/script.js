@@ -1,97 +1,108 @@
-// Define constants
-const GRID_SIZE = 21; // Number of rows and columns in the grid
-const SQUARE_SIZE = 15; // Size of each square in pixels
-const SPACING = 5; // Spacing between squares
-const KEY_LEFT = 'ArrowLeft';
-const KEY_UP = 'ArrowUp';
-const KEY_RIGHT = 'ArrowRight';
-const KEY_DOWN = 'ArrowDown';
-const KEY_W = 'KeyW';
-const KEY_A = 'KeyA';
-const KEY_S = 'KeyS';
-const KEY_D = 'KeyD';
+let grid = document.getElementById('grid');
+let currentRoom = { x: 5, y: 5 };
+let playerPosition = { x: 5, y: 5 };
+let roomData = {};
+let vaultSize = 10;
+let portalFacing = null;
 
-let playerPosition = { row: Math.floor(GRID_SIZE / 2), col: Math.floor(GRID_SIZE / 2) }; // Starting position in the center
-
-// Function to generate the map grid
-function generateMap() {
-    const mapElement = document.getElementById('map');
-
-    // Clear previous content
-    mapElement.innerHTML = '';
-
-    // Loop to create each room
-    for (let row = 0; row < GRID_SIZE; row++) {
-        for (let col = 0; col < GRID_SIZE; col++) {
-            const room = document.createElement('div');
-            room.classList.add('room');
-            room.dataset.row = row;
-            room.dataset.col = col;
-            
-            mapElement.appendChild(room);
-        }
+// Initialize Grid
+function initializeGrid() {
+    grid.innerHTML = '';
+    for (let i = 0; i < vaultSize * vaultSize; i++) {
+        let cell = document.createElement('div');
+        cell.className = 'grid-cell';
+        cell.innerHTML = <span></span>;
+        grid.appendChild(cell);
     }
-
-    // Create player dot in starting position
-    updatePlayerPosition();
+    markRoom(currentRoom.x, currentRoom.y, 'portal');
+    roomData[${currentRoom.x},${currentRoom.y}] = { type: 'portal', cleaned: false, goodToCollect: false };
 }
 
-// Function to update player position on the grid
-function updatePlayerPosition() {
-    const playerDot = document.createElement('div');
-    playerDot.classList.add('player');
-    playerDot.style.top = `${playerPosition.row * (SQUARE_SIZE + SPACING) + SPACING}px`;
-    playerDot.style.left = `${playerPosition.col * (SQUARE_SIZE + SPACING) + SPACING}px`;
-
-    const mapElement = document.getElementById('map');
-    mapElement.appendChild(playerDot);
+// Reset Map
+function resetMap() {
+    currentRoom = { x: Math.floor(vaultSize / 2), y: Math.floor(vaultSize / 2) };
+    playerPosition = { ...currentRoom };
+    roomData = {};
+    initializeGrid();
+    promptPortalFacing();
 }
 
-// Function to move player dot based on key press
-function movePlayer(direction) {
+// Prompt user to set portal facing direction
+function promptPortalFacing() {
+    let direction = prompt("Enter portal facing direction (north, south, east, west):").toLowerCase();
+    while (!['north', 'south', 'east', 'west'].includes(direction)) {
+        direction = prompt("Invalid direction. Enter portal facing direction (north, south, east, west):").toLowerCase();
+    }
+    portalFacing = direction;
+    setStartingRoom(direction);
+}
+
+// Set starting room based on portal facing direction
+function setStartingRoom(direction) {
+    let startingRoom;
     switch (direction) {
-        case KEY_LEFT:
-        case KEY_A:
-            if (playerPosition.col > 0) {
-                playerPosition.col--;
-            }
+        case 'north':
+            startingRoom = { x: currentRoom.x, y: currentRoom.y - 1 };
             break;
-        case KEY_UP:
-        case KEY_W:
-            if (playerPosition.row > 0) {
-                playerPosition.row--;
-            }
+        case 'south':
+            startingRoom = { x: currentRoom.x, y: currentRoom.y + 1 };
             break;
-        case KEY_RIGHT:
-        case KEY_D:
-            if (playerPosition.col < GRID_SIZE - 1) {
-                playerPosition.col++;
-            }
+        case 'east':
+            startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
             break;
-        case KEY_DOWN:
-        case KEY_S:
-            if (playerPosition.row < GRID_SIZE - 1) {
-                playerPosition.row++;
-            }
+        case 'west':
+            startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
             break;
-        default:
-            return;
     }
-
-    updatePlayerPosition();
+    roomData[${startingRoom.x},${startingRoom.y}] = { type: 'normal', cleaned: false, goodToCollect: false };
+    markRoom(startingRoom.x, startingRoom.y, 'current');
+    markPlayerPosition(startingRoom.x, startingRoom.y);
 }
 
-// Function to handle key press events
-function handleKeyPress(event) {
-    const key = event.code;
-    movePlayer(key);
+// Function to move in the grid
+function move(direction) {
+    let previousRoom = { ...playerPosition };
+    switch (direction) {
+        case 'north':
+            if (playerPosition.y > 0) playerPosition.y--;
+            break;
+        case 'south':
+            if (playerPosition.y < vaultSize - 1) playerPosition.y++;
+            break;
+        case 'east':
+            if (playerPosition.x < vaultSize - 1) playerPosition.x++;
+            break;
+        case 'west':
+            if (playerPosition.x > 0) playerPosition.x--;
+            break;
+    }
+    markRoom(previousRoom.x, previousRoom.y, roomData[${previousRoom.x},${previousRoom.y}]?.type || 'normal');
+    markPlayerPosition(playerPosition.x, playerPosition.y);
 }
 
-// Function to initialize the application
-function initApp() {
-    generateMap();
-    document.addEventListener('keydown', handleKeyPress);
+// Function to mark rooms
+function markRoom(x, y, type) {
+    let index = y * vaultSize + x;
+    let cell = grid.children[index];
+    cell.className = grid-cell ${type};
+    cell.style.visibility = 'visible';
 }
 
-// Initialize the application when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', initApp);
+// Function to mark player position
+function markPlayerPosition(x, y) {
+    let index = y * vaultSize + x;
+    let cell = grid.children[index];
+    cell.innerHTML = <div class="player"></div>;
+    roomData[${x},${y}] = roomData[${x},${y}] || { type: 'normal', cleaned: false, goodToCollect: false };
+}
+
+// Initialize the map on load
+resetMap();
+
+document.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
+    if (['w', 'arrowup'].includes(key)) move('north');
+    if (['a', 'arrowleft'].includes(key)) move('west');
+    if (['s', 'arrowdown'].includes(key)) move('south');
+    if (['d', 'arrowright'].includes(key)) move('east');
+});

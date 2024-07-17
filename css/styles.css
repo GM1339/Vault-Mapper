@@ -1,41 +1,88 @@
 body {
+    background-color: #1C1C1C;
+    color: #fff;
     font-family: Arial, sans-serif;
-    background-color: #333; /* Dark gray background */
-    margin: 0;
-    padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
+    margin: 0;
 }
 
-.container {
-    text-align: center;
-    color: white; /* White text color */
-}
-
-.map {
-    display: grid;
-    grid-template-columns: repeat(21, 20px); /* Adjusted column width with spacing */
-    grid-template-rows: repeat(21, 20px); /* Adjusted row height with spacing */
-    gap: 5px; /* Spacing between squares */
-    margin-top: 20px;
-    background-color: #eee; /* Light gray background */
-    border: 1px solid #000; /* Black border */
-}
-
-.room {
-    background-color: #333; /* Light gray background */
-    border: 2px solid #000; /* Black 2px border */
-    text-align: center;
+#controls {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Make rooms 100% of their parent container's height */
-    width: 100%; /* Make rooms 100% of their parent container's width */
-    margin: -2px; /* Adjust for the border size */
+    flex-direction: column;
+	align-items: center;
+    margin-bottom: 20px;
 }
 
-.room:not(:last-child) {
-    background-color: #333; /* Same color as page background between rooms */
+#controls button {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
+    gap: 5px;
+}
+
+.grid-cell {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.portal {
+    background-color: gray;
+    border-top: 3px solid darkgray;
+    border-left: 3px solid darkgray;
+    border-right: 3px solid darkgray;
+}
+
+.portal::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400%;
+    animation: cycle-colors 5s linear infinite;
+    position: absolute;
+    bottom: 10px;
+}
+
+@keyframes cycle-colors {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.current {
+    background-color: black;
+}
+
+.player {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+}
+
+.cleaned {
+    border: 2px solid green;
+}
+
+.good-to-collect {
+    border: 2px solid yellow;
 }
