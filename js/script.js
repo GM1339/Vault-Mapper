@@ -198,9 +198,9 @@ function move(direction) {
 
 function markRoom(x, y) {
 
-   // let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
 	
-	let cell = grid.querySelector(`[x="${x}"][y="${y}"]`);
+	let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
 
     cell.style.visibility = 'visible';
 
