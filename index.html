@@ -8,22 +8,24 @@
 </head>
 <body>
     <div id="controls">
-        <button onclick="move('north')">N</button>
+        <div>
+            <button onclick="move('north')">N</button>
+        </div>
         <div>
             <button onclick="move('west')">W</button>
             <button onclick="move('east')">E</button>
         </div>
-<<<<<<< HEAD
-        <button onclick="move('south')">S</button>
-=======
         <div>
             <button onclick="move('south')">S</button>
         </div>
         <div>
-            <button onclick="undo()">Undo</button>
-            <button onclick="redo()">Redo</button>
+            <button class="undo" onclick="undo()">Undo</button>
+            <button class="redo" onclick="redo()">Redo</button>
         </div>
->>>>>>> parent of 7ddf82e (One checkbox, no cloning dot)
+        <div>
+            <label id="completionLabel" for="completionCheckbox">Uncompleted</label>
+            <input type="checkbox" id="completionCheckbox" onchange="toggleCompletion()">
+        </div>
     </div>
     <div id="grid"></div>
     <script src="js/script.js"></script>

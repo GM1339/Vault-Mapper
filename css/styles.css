@@ -1,5 +1,5 @@
 body {
-    background-color: #4986E7;
+    background-color: #1C1C1C;
     color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
@@ -11,10 +11,17 @@ body {
 }
 
 #controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     display: flex;
     flex-direction: column;
-	align-items: center;
-    margin-bottom: 20px;
+    align-items: flex-end;
+    z-index: 1;
+}
+
+#controls div {
+    margin-bottom: 10px;
 }
 
 #controls button {
@@ -28,41 +35,22 @@ body {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
-#grid {
-    display: grid;
-<<<<<<< HEAD
-    grid-template-columns: repeat(10, 50px);
-    grid-template-rows: repeat(10, 50px);
-    gap: 5px;
-=======
-    grid-template-columns: repeat(21, 50px);
-    grid-template-rows: repeat(21, 50px);
-    gap: 5px;
-=======
 /* Ensure North, South, East, West buttons match WASD layout */
-#controls > div:nth-child(1) {
-    display: flex;
-    justify-content: center;
-}
-
-#controls > div:nth-child(2) {
-    display: flex;
-    justify-content: space-between;
-}
-
+#controls > div:nth-child(1),
 #controls > div:nth-child(3) {
     display: flex;
     justify-content: center;
 }
 
+#controls > div:nth-child(2),
 #controls > div:nth-child(4) {
     display: flex;
     justify-content: space-between;
 }
 
 /* Undo and Redo buttons as sideways rectangles */
-#controls button.undo, #controls button.redo {
+#controls button.undo,
+#controls button.redo {
     width: 60px; /* Adjust width as needed */
     height: 30px; /* Adjust height as needed */
     padding: 5px; /* Adjust padding for text spacing */
@@ -83,42 +71,63 @@ body {
     grid-template-columns: repeat(21, 30px); /* Adjusted room size to 30px */
     grid-template-rows: repeat(21, 30px); /* Adjusted room size to 30px */
     gap: 3px; /* Reduced gap between rooms */
->>>>>>> parent of 7ddf82e (One checkbox, no cloning dot)
-    margin-bottom: 60px; /* Adjust margin to accommodate controls */
+    margin-bottom: 100px; /* Adjust margin to accommodate controls */
     transform: translate(-50%, -50%);
     position: absolute;
     top: 50%;
     left: 50%;
->>>>>>> parent of f2ba6ec (Smaller rooms and non-cloning player dot)
 }
 
 .grid-cell {
-    width: 50px;
-    height: 50px;
+    width: 30px; /* Adjusted room size to 30px */
+    height: 30px; /* Adjusted room size to 30px */
     background-color: transparent;
-    border: 1px solid #333;
+    border: none; /* No initial border */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
+.grid-cell.discovered {
+    background-color: #f0f0f0; /* Pale gray background for discovered rooms */
+    border: 3px solid red; /* Red border for discovered rooms */
+}
+
+.grid-cell.completed {
+    border-color: green !important; /* Green border for completed rooms */
+}
+
 .portal {
     background-color: gray;
-    border-top: 3px solid darkgray;
-    border-left: 3px solid darkgray;
-    border-right: 3px solid darkgray;
+    border: 3px solid darkgray;
+}
+
+.portal.north {
+    border-top: none;
+}
+
+.portal.east {
+    border-right: none;
+}
+
+.portal.south {
+    border-bottom: none;
+}
+
+.portal.west {
+    border-left: none;
 }
 
 .portal::after {
     content: '';
-    width: 20px;
-    height: 20px;
+    width: 15px; /* Adjusted size of portal indicator */
+    height: 15px; /* Adjusted size of portal indicator */
     background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
     background-size: 400%;
     animation: cycle-colors 5s linear infinite;
     position: absolute;
-    bottom: 10px;
+    bottom: 5px; /* Adjusted position of portal indicator */
 }
 
 @keyframes cycle-colors {
@@ -126,40 +135,31 @@ body {
     100% { background-position: 100% 50%; }
 }
 
-<<<<<<< HEAD
-.current {
-    background-color: black;
-=======
 .player {
-<<<<<<< HEAD
-    width: 20px;
-    height: 20px;
+    width: 25px; /* Adjusted size of player dot */
+    height: 25px; /* Adjusted size of player dot */
     background-color: white;
+    border: 2px solid black; /* Black border for player dot */
     border-radius: 50%; /* Circle shape */
->>>>>>> parent of f2ba6ec (Smaller rooms and non-cloning player dot)
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Initially hidden */
 }
 
-.player {
-    width: 10px;
-    height: 10px;
-    background-color: white;
-}
-
-.cleaned {
-    border: 2px solid green;
-}
-
-.good-to-collect {
-    border: 2px solid yellow;
-}
-=======
-    width: 15px; /* Adjusted size of player dot */
-    height: 15px; /* Adjusted size of player dot */
-    background-color: white;
-    border-radius: 50%; /* Circle shape */
+.player.active {
+    display: block; /* Display only in the current room */
 }
 
 input[type="checkbox"] {
-    margin-left: 5px;
+    display: none; /* Hide default checkbox */
 }
->>>>>>> parent of 7ddf82e (One checkbox, no cloning dot)
+
+input[type="checkbox"] + label {
+    color: red; /* Default label color */
+}
+
+input[type="checkbox"]:checked + label {
+    color: green; /* Label color when checked */
+}
