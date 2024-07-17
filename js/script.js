@@ -148,7 +148,7 @@ function markPortalRoom(x, y, direction) {
 
 function move(direction) {
 
-    let currentRoom = { ...playerPosition }; //GREG
+    let previousRoom = { ...playerPosition };
 
     switch (direction) {
 
@@ -199,8 +199,6 @@ function move(direction) {
 function markRoom(x, y) {
 
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-	
-	let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
 
     cell.style.visibility = 'visible';
 
