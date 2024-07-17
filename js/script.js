@@ -184,9 +184,9 @@ function move(direction) {
 
     }
 
-    markRoom(currentRoom.x, currentRoom.y); /*GREG*/
+    markRoom(previousRoom.x, previousRoom.y);
 
-    markPlayerPosition(playerPosition.x, playerPosition.y);/* GREG*/
+    markPlayerPosition(playerPosition.x, playerPosition.y);
 
     updateCompletion();
 
