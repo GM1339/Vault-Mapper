@@ -130,6 +130,22 @@ function setStartingRoom(direction) {
 
 
 
+//next segment added by GREG
+
+function toggleCompletion() {
+    let currentRoomKey = `${playerPosition.x},${playerPosition.y}`;
+    let isChecked = document.getElementById('completion-checkbox').checked;
+    roomData[currentRoomKey].completed = isChecked;
+    markRoom(playerPosition.x, playerPosition.y);
+}
+
+
+
+
+
+
+
+
 // Function to mark portal room
 
 function markPortalRoom(x, y, direction) {
@@ -144,72 +160,47 @@ function markPortalRoom(x, y, direction) {
 
 
 
-// Function to move in the grid
+// Function to move in the grid -edit by GREG with gpt snippet
 
 function move(direction) {
-
     let previousRoom = { ...playerPosition };
-
     switch (direction) {
-
         case 'north':
-
-            if (playerPosition.y > 0 && !(playerPosition.x === currentRoom.x && playerPosition.y - 1 === currentRoom.y)) playerPosition.y--;
-
+            if (playerPosition.y > 0) playerPosition.y--;
             break;
-
         case 'south':
-
-            if (playerPosition.y < vaultSize - 1 && !(playerPosition.x === currentRoom.x && playerPosition.y + 1 === currentRoom.y)) playerPosition.y++;
-
+            if (playerPosition.y < vaultSize - 1) playerPosition.y++;
             break;
-
         case 'east':
-
-            if (playerPosition.x < vaultSize - 1 && !(playerPosition.x + 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x++;
-
+            if (playerPosition.x < vaultSize - 1) playerPosition.x++;
             break;
-
         case 'west':
-
-            if (playerPosition.x > 0 && !(playerPosition.x - 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x--;
-
+            if (playerPosition.x > 0) playerPosition.x--;
             break;
-
     }
-
     if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
-
         roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
-
     }
-
     markRoom(previousRoom.x, previousRoom.y);
-
     markPlayerPosition(playerPosition.x, playerPosition.y);
-
     updateCompletion();
-
+    document.getElementById('completion-checkbox').checked = roomData[`${playerPosition.x},${playerPosition.y}`].completed;
 }
 
 
 
-// Function to mark rooms
+
+// Function to mark rooms- changed by GREG
 
 function markRoom(x, y) {
-
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-
     cell.style.visibility = 'visible';
-
     cell.classList.add('discovered');
-
-    if (completedRooms[`${x},${y}`]) {
-
+    if (roomData[`${x},${y}`].completed) {
         cell.classList.add('completed');
-
+    } else {
+        cell.classList.remove('completed');
     }
-
 }
 
 
