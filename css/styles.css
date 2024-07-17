@@ -1,5 +1,5 @@
 body {
-    background-color: #4986E7;
+    background-color: #1C1C1C;
     color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
@@ -36,28 +36,21 @@ body {
 }
 
 /* Ensure North, South, East, West buttons match WASD layout */
-#controls > div:nth-child(1) {
-    display: flex;
-    justify-content: center;
-}
-
-#controls > div:nth-child(2) {
-    display: flex;
-    justify-content: space-between;
-}
-
+#controls > div:nth-child(1),
 #controls > div:nth-child(3) {
     display: flex;
     justify-content: center;
 }
 
+#controls > div:nth-child(2),
 #controls > div:nth-child(4) {
     display: flex;
     justify-content: space-between;
 }
 
 /* Undo and Redo buttons as sideways rectangles */
-#controls button.undo, #controls button.redo {
+#controls button.undo,
+#controls button.redo {
     width: 60px; /* Adjust width as needed */
     height: 30px; /* Adjust height as needed */
     padding: 5px; /* Adjust padding for text spacing */
@@ -78,7 +71,7 @@ body {
     grid-template-columns: repeat(21, 30px); /* Adjusted room size to 30px */
     grid-template-rows: repeat(21, 30px); /* Adjusted room size to 30px */
     gap: 3px; /* Reduced gap between rooms */
-    margin-bottom: 60px; /* Adjust margin to accommodate controls */
+    margin-bottom: 100px; /* Adjust margin to accommodate controls */
     transform: translate(-50%, -50%);
     position: absolute;
     top: 50%;
@@ -143,12 +136,30 @@ body {
 }
 
 .player {
-    width: 15px; /* Adjusted size of player dot */
-    height: 15px; /* Adjusted size of player dot */
+    width: 25px; /* Adjusted size of player dot */
+    height: 25px; /* Adjusted size of player dot */
     background-color: white;
+    border: 2px solid black; /* Black border for player dot */
     border-radius: 50%; /* Circle shape */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Initially hidden */
+}
+
+.player.active {
+    display: block; /* Display only in the current room */
 }
 
 input[type="checkbox"] {
-    margin-left: 5px;
+    display: none; /* Hide default checkbox */
+}
+
+input[type="checkbox"] + label {
+    color: red; /* Default label color */
+}
+
+input[type="checkbox"]:checked + label {
+    color: green; /* Label color when checked */
 }
