@@ -75,9 +75,9 @@ body {
     height: 30px; /* Adjusted size for smaller rooms */
     background: radial-gradient(270deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
     background-size: 400%;
-    animation: cycle-colors 5s radial infinite; /*GREG changed from linear to radial*/
+    animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*/
     position: absolute;
-    bottom: 5px; /* Adjusted position for smaller rooms */
+    bottom: 4px; /*GREG Adjusted position for smaller rooms */
     left: 50%;
     transform: translateX(-50%);
     border: 3px solid black; /* GREG Black border for the smaller rectangle */
