@@ -1,5 +1,5 @@
 body {
-    background-color: #1C1C1C;
+    background-color: #4986E7;
     color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
@@ -28,6 +28,7 @@ body {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 #grid {
     display: grid;
 <<<<<<< HEAD
@@ -38,6 +39,51 @@ body {
     grid-template-columns: repeat(21, 50px);
     grid-template-rows: repeat(21, 50px);
     gap: 5px;
+=======
+/* Ensure North, South, East, West buttons match WASD layout */
+#controls > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+}
+
+#controls > div:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+}
+
+#controls > div:nth-child(3) {
+    display: flex;
+    justify-content: center;
+}
+
+#controls > div:nth-child(4) {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Undo and Redo buttons as sideways rectangles */
+#controls button.undo, #controls button.redo {
+    width: 60px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    padding: 5px; /* Adjust padding for text spacing */
+    font-size: 14px;
+}
+
+/* Center text inside Undo and Redo buttons */
+#controls button.undo {
+    transform: rotate(90deg);
+}
+
+#controls button.redo {
+    transform: rotate(-90deg);
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(21, 30px); /* Adjusted room size to 30px */
+    grid-template-rows: repeat(21, 30px); /* Adjusted room size to 30px */
+    gap: 3px; /* Reduced gap between rooms */
+>>>>>>> parent of 7ddf82e (One checkbox, no cloning dot)
     margin-bottom: 60px; /* Adjust margin to accommodate controls */
     transform: translate(-50%, -50%);
     position: absolute;
@@ -85,6 +131,7 @@ body {
     background-color: black;
 =======
 .player {
+<<<<<<< HEAD
     width: 20px;
     height: 20px;
     background-color: white;
@@ -105,3 +152,14 @@ body {
 .good-to-collect {
     border: 2px solid yellow;
 }
+=======
+    width: 15px; /* Adjusted size of player dot */
+    height: 15px; /* Adjusted size of player dot */
+    background-color: white;
+    border-radius: 50%; /* Circle shape */
+}
+
+input[type="checkbox"] {
+    margin-left: 5px;
+}
+>>>>>>> parent of 7ddf82e (One checkbox, no cloning dot)
