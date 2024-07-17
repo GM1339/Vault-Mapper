@@ -16,8 +16,8 @@ body {
 
 .map {
     display: grid;
-    grid-template-columns: repeat(21, 15px); /* Adjusted column width */
-    grid-template-rows: repeat(21, 15px); /* Adjusted row height */
+    grid-template-columns: repeat(21, 20px); /* Adjusted column width with spacing */
+    grid-template-rows: repeat(21, 20px); /* Adjusted row height with spacing */
     gap: 5px; /* Spacing between squares */
     margin-top: 20px;
     background-color: #bbb; /* Light gray background */
@@ -31,12 +31,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%; /* Make rooms 100% of their parent container's height */
+    width: 100%; /* Make rooms 100% of their parent container's width */
+    margin: -2px; /* Adjust for the border size */
 }
 
-.player {
-    width: 10px; /* Player dot size */
-    height: 10px; /* Player dot size */
-    border-radius: 50%;
-    background-color: white; /* White player dot */
-    position: absolute; /* Positioning relative to the map */
+.room:not(:last-child) {
+    background-color: #333; /* Same color as page background between rooms */
 }
