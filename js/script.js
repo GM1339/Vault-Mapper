@@ -220,14 +220,12 @@ function markRoom(x, y) {
 
 
 
-// Function to mark player position
+// Function to mark player position edite by GREG with gpt snippet
 
 function markPlayerPosition(x, y) {
-
+    document.querySelectorAll('.player').forEach(player => player.remove()); // Remove previous player icons
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-
-    cell.innerHTML = `<div class="player"></div>`;
-
+    cell.innerHTML = `<div class="player" style="border: 3px solid black;"></div>`;
 }
 
 
