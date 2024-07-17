@@ -99,3 +99,18 @@ body {
 input[type="checkbox"] {
     margin-left: 5px;
 }
+
+//below added by GREG
+#completion-checkbox-container {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#completion-checkbox {
+    margin-right: 5px;
+}
