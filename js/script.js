@@ -1,25 +1,21 @@
 let grid = document.getElementById('grid');
-let currentRoom = { x: 10, y: 10 }; // Starting room in the center for 21x21 grid
-let playerPosition = { x: 10, y: 10 }; // Starting position in the center
+let currentRoom = { x: 5, y: 5 };
+let playerPosition = { x: 5, y: 5 };
 let roomData = {};
-let vaultSize = 21; // Adjusted for 21x21 grid
+let vaultSize = 10;
 let portalFacing = null;
 
 // Initialize Grid
 function initializeGrid() {
     grid.innerHTML = '';
-    for (let y = 0; y < vaultSize; y++) {
-        for (let x = 0; x < vaultSize; x++) {
-            let cell = document.createElement('div');
-            cell.className = 'grid-cell';
-            cell.dataset.x = x;
-            cell.dataset.y = y;
-            grid.appendChild(cell);
-        }
+    for (let i = 0; i < vaultSize * vaultSize; i++) {
+        let cell = document.createElement('div');
+        cell.className = 'grid-cell';
+        cell.innerHTML = <span></span>;
+        grid.appendChild(cell);
     }
     markRoom(currentRoom.x, currentRoom.y, 'portal');
-    roomData[`${currentRoom.x},${currentRoom.y}`] = { type: 'portal', cleaned: false, goodToCollect: false, completed: false };
-    setupCompletionToggle(); // Setup completion toggle checkbox
+    roomData[${currentRoom.x},${currentRoom.y}] = { type: 'portal', cleaned: false, goodToCollect: false };
 }
 
 // Reset Map
@@ -58,7 +54,7 @@ function setStartingRoom(direction) {
             startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
             break;
     }
-    roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', cleaned: false, goodToCollect: false, completed: false };
+    roomData[${startingRoom.x},${startingRoom.y}] = { type: 'normal', cleaned: false, goodToCollect: false };
     markRoom(startingRoom.x, startingRoom.y, 'current');
     markPlayerPosition(startingRoom.x, startingRoom.y);
 }
@@ -80,68 +76,24 @@ function move(direction) {
             if (playerPosition.x > 0) playerPosition.x--;
             break;
     }
-    markRoom(previousRoom.x, previousRoom.y, roomData[`${previousRoom.x},${previousRoom.y}`]?.type || 'normal');
+    markRoom(previousRoom.x, previousRoom.y, roomData[${previousRoom.x},${previousRoom.y}]?.type || 'normal');
     markPlayerPosition(playerPosition.x, playerPosition.y);
-    updateCompletionStatus(playerPosition.x, playerPosition.y); // Update completion status
 }
 
 // Function to mark rooms
 function markRoom(x, y, type) {
-    let cell = getCellElement(x, y);
-    if (cell) {
-        cell.className = `grid-cell ${type}`;
-        cell.style.visibility = 'visible';
-    }
-}
-
-// Function to get grid cell element
-function getCellElement(x, y) {
-    return grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    let index = y * vaultSize + x;
+    let cell = grid.children[index];
+    cell.className = grid-cell ${type};
+    cell.style.visibility = 'visible';
 }
 
 // Function to mark player position
 function markPlayerPosition(x, y) {
-    let cell = getCellElement(x, y);
-    if (cell) {
-        cell.innerHTML = `<div class="player"></div>`;
-        roomData[`${x},${y}`] = roomData[`${x},${y}`] || { type: 'normal', cleaned: false, goodToCollect: false, completed: false };
-    }
-}
-
-// Setup completion toggle checkbox
-function setupCompletionToggle() {
-    let completionCheckbox = document.getElementById('completionCheckbox');
-    completionCheckbox.addEventListener('change', function() {
-        let roomDataKey = `${playerPosition.x},${playerPosition.y}`;
-        roomData[roomDataKey].completed = this.checked;
-        updateCompletionLabel(this.checked);
-        markRoom(playerPosition.x, playerPosition.y, roomData[roomDataKey].type);
-    });
-}
-
-// Update completion label based on checkbox state
-function updateCompletionLabel(checked) {
-    let completionLabel = document.getElementById('completionLabel');
-    if (checked) {
-        completionLabel.textContent = 'Completed';
-        completionLabel.style.color = 'green';
-    } else {
-        completionLabel.textContent = 'Uncompleted';
-        completionLabel.style.color = 'red';
-    }
-}
-
-// Function to update completion status based on player position
-function updateCompletionStatus(x, y) {
-    let roomDataKey = `${x},${y}`;
-    let completionCheckbox = document.getElementById('completionCheckbox');
-    if (roomData[roomDataKey].completed) {
-        completionCheckbox.checked = true;
-        updateCompletionLabel(true);
-    } else {
-        completionCheckbox.checked = false;
-        updateCompletionLabel(false);
-    }
+    let index = y * vaultSize + x;
+    let cell = grid.children[index];
+    cell.innerHTML = <div class="player"></div>;
+    roomData[${x},${y}] = roomData[${x},${y}] || { type: 'normal', cleaned: false, goodToCollect: false };
 }
 
 // Initialize the map on load
