@@ -37,8 +37,8 @@ body {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(20, 50px);
-    grid-template-rows: repeat(20, 50px);
+    grid-template-columns: repeat(21, 50px);
+    grid-template-rows: repeat(21, 50px);
     gap: 5px;
     margin-bottom: 60px; /* Adjust margin to accommodate controls */
 }
@@ -47,11 +47,20 @@ body {
     width: 50px;
     height: 50px;
     background-color: transparent;
-    border: 1px solid #ccc; /* Light gray border for room connections */
+    border: none; /* No initial border */
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+}
+
+.grid-cell.discovered {
+    background-color: #f0f0f0; /* Pale gray background for discovered rooms */
+    border: 3px solid red; /* Red border for discovered rooms */
+}
+
+.grid-cell.completed {
+    border-color: green !important; /* Green border for completed rooms */
 }
 
 .portal {
@@ -91,20 +100,13 @@ body {
     100% { background-position: 100% 50%; }
 }
 
-.current {
-    background-color: black;
-}
-
 .player {
-    width: 10px;
-    height: 10px;
-    background-color: black;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%; /* Circle shape */
 }
 
-.cleaned {
-    border: 2px solid green;
-}
-
-.good-to-collect {
-    border: 2px solid yellow;
+input[type="checkbox"] {
+    margin-left: 5px;
 }

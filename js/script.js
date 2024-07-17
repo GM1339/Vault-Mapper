@@ -1,21 +1,25 @@
 let grid = document.getElementById('grid');
-let currentRoom = { x: 5, y: 5 };
-let playerPosition = { x: 5, y: 5 };
+let currentRoom = { x: 10, y: 10 }; // Starting at the center for a 21x21 grid
+let playerPosition = { ...currentRoom }; // Start player at the center
 let roomData = {};
-let vaultSize = 10;
+let vaultSize = 21; // Change grid size to 21x21
 let portalFacing = null;
+let completedRooms = {};
 
 // Initialize Grid
 function initializeGrid() {
     grid.innerHTML = '';
-    for (let i = 0; i < vaultSize * vaultSize; i++) {
-        let cell = document.createElement('div');
-        cell.className = 'grid-cell';
-        cell.innerHTML = `<span></span>`;
-        grid.appendChild(cell);
+    for (let y = 0; y < vaultSize; y++) {
+        for (let x = 0; x < vaultSize; x++) {
+            let cell = document.createElement('div');
+            cell.className = 'grid-cell';
+            cell.dataset.x = x;
+            cell.dataset.y = y;
+            cell.innerHTML = `<span></span>`;
+            grid.appendChild(cell);
+        }
     }
-    markRoom(currentRoom.x, currentRoom.y, 'portal');
-    roomData[`${currentRoom.x},${currentRoom.y}`] = { type: 'portal', cleaned: false, goodToCollect: false };
+    promptPortalFacing();
 }
 
 // Reset Map
@@ -23,8 +27,8 @@ function resetMap() {
     currentRoom = { x: Math.floor(vaultSize / 2), y: Math.floor(vaultSize / 2) };
     playerPosition = { ...currentRoom };
     roomData = {};
+    completedRooms = {};
     initializeGrid();
-    promptPortalFacing();
 }
 
 // Prompt user to set portal facing direction
@@ -54,8 +58,8 @@ function setStartingRoom(direction) {
             startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
             break;
     }
-    roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', cleaned: false, goodToCollect: false };
-    markRoom(startingRoom.x, startingRoom.y, 'current');
+    roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false };
+    markRoom(startingRoom.x, startingRoom.y);
     markPlayerPosition(startingRoom.x, startingRoom.y);
 }
 
@@ -76,24 +80,56 @@ function move(direction) {
             if (playerPosition.x > 0) playerPosition.x--;
             break;
     }
-    markRoom(previousRoom.x, previousRoom.y, roomData[`${previousRoom.x},${previousRoom.y}`]?.type || 'normal');
+    if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
+        roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
+    }
+    markRoom(previousRoom.x, previousRoom.y);
     markPlayerPosition(playerPosition.x, playerPosition.y);
+    updateCompletion();
 }
 
 // Function to mark rooms
-function markRoom(x, y, type) {
-    let index = y * vaultSize + x;
-    let cell = grid.children[index];
-    cell.className = `grid-cell ${type}`;
+function markRoom(x, y) {
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     cell.style.visibility = 'visible';
+    cell.classList.add('discovered');
+    if (completedRooms[`${x},${y}`]) {
+        cell.classList.add('completed');
+    }
 }
 
 // Function to mark player position
 function markPlayerPosition(x, y) {
-    let index = y * vaultSize + x;
-    let cell = grid.children[index];
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     cell.innerHTML = `<div class="player"></div>`;
-    roomData[`${x},${y}`] = roomData[`${x},${y}`] || { type: 'normal', cleaned: false, goodToCollect: false };
+}
+
+// Undo move
+function undo() {
+    // Implement your undo logic here
+}
+
+// Redo move
+function redo() {
+    // Implement your redo logic here
+}
+
+// Update room completion status
+function updateCompletion() {
+    let cell = grid.querySelector(`[data-x="${playerPosition.x}"][data-y="${playerPosition.y}"]`);
+    let checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = completedRooms[`${playerPosition.x},${playerPosition.y}`];
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            completedRooms[`${playerPosition.x},${playerPosition.y}`] = true;
+            cell.classList.add('completed');
+        } else {
+            completedRooms[`${playerPosition.x},${playerPosition.y}`] = false;
+            cell.classList.remove('completed');
+        }
+    });
+    cell.appendChild(checkbox);
 }
 
 // Initialize the map on load
