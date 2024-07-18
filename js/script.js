@@ -26,30 +26,7 @@ function initializeGrid() {
             grid.appendChild(cell);
 
 
-            // Add horizontal corridor
-            if (x < vaultSize - 1) {
-                let corridor = document.createElement('div');
-                corridor.className = 'horizontal-corridor';
-                corridor.dataset.startX = x;
-                corridor.dataset.startY = y;
-                corridor.dataset.endX = x + 1;
-                corridor.dataset.endY = y;
-                corridor.style.gridRow = y + 1;
-                corridor.style.gridColumn = (x * 2) + 2;
-                grid.appendChild(corridor);
-            }
 
-            // Add vertical corridor
-            if (y < vaultSize - 1) {
-                let corridor = document.createElement('div');
-                corridor.className = 'vertical-corridor';
-                corridor.dataset.startX = x;
-                corridor.dataset.startY = y;
-                corridor.dataset.endX = x;
-                corridor.dataset.endY = y + 1;
-                corridor.style.gridRow = (y * 2) + 2;
-                corridor.style.gridColumn = x + 1;
-                grid.appendChild(corridor);
 
         }
 
