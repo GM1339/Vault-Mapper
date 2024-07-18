@@ -1,15 +1,9 @@
 let grid = document.getElementById('grid');
-
 let currentRoom = { x: 10, y: 10 }; // Starting at the center for a 21x21 grid
-
 let playerPosition = { x: 10, y: 10 }; // Start player in the center initially
-
 let roomData = {};
-
 let vaultSize = 21; // Change grid size to 21x21
-
 let portalFacing = null;
-
 let completedRooms = {};
 
 
@@ -30,6 +24,32 @@ function initializeGrid() {
             cell.dataset.y = y;
             cell.innerHTML = `<span></span>`;
             grid.appendChild(cell);
+
+
+            // Add horizontal corridor
+            if (x < vaultSize - 1) {
+                let corridor = document.createElement('div');
+                corridor.className = 'horizontal-corridor';
+                corridor.dataset.startX = x;
+                corridor.dataset.startY = y;
+                corridor.dataset.endX = x + 1;
+                corridor.dataset.endY = y;
+                corridor.style.gridRow = y + 1;
+                corridor.style.gridColumn = (x * 2) + 2;
+                grid.appendChild(corridor);
+            }
+
+            // Add vertical corridor
+            if (y < vaultSize - 1) {
+                let corridor = document.createElement('div');
+                corridor.className = 'vertical-corridor';
+                corridor.dataset.startX = x;
+                corridor.dataset.startY = y;
+                corridor.dataset.endX = x;
+                corridor.dataset.endY = y + 1;
+                corridor.style.gridRow = (y * 2) + 2;
+                corridor.style.gridColumn = x + 1;
+                grid.appendChild(corridor);
 
         }
 
@@ -178,9 +198,38 @@ function markRoom(x, y) {
     } else {
         cell.classList.remove('completed');
     }
+    
+    // Show corridors if both rooms are discovered
+    showCorridors(x, y);
 }
 
 
+
+function showCorridors(x, y) {
+    // Check and show horizontal corridors
+    let horizontalCorridor = grid.querySelector(`.horizontal-corridor[data-start-x="${x}"][data-start-y="${y}"]`);
+    if (horizontalCorridor) {
+        let endX = parseInt(horizontalCorridor.dataset.endX);
+        let endY = parseInt(horizontalCorridor.dataset.endY);
+        if (roomData[`${endX},${endY}`]?.discovered) {
+            horizontalCorridor.style.visibility = 'visible';
+        }
+    }
+
+    // Check and show vertical corridors
+    let verticalCorridor = grid.querySelector(`.vertical-corridor[data-start-x="${x}"][data-start-y="${y}"]`);
+    if (verticalCorridor) {
+        let endX = parseInt(verticalCorridor.dataset.endX);
+        let endY = parseInt(verticalCorridor.dataset.endY);
+        if (roomData[`${endX},${endY}`]?.discovered) {
+            verticalCorridor.style.visibility = 'visible';
+        }
+    }
+}
+
+
+
+    
 
 // Function to mark player position edite by GREG with gpt snippet
 
