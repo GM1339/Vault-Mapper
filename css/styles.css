@@ -1,12 +1,13 @@
 body {
-    background-color: #1C1C1C;
-    color: #fff;
+    background-image: url('images/page-background.png'); /* Path to your image */
+    background-size: cover; /* Ensures the image covers the entire page */
+    background-repeat: no-repeat;
+    background-position: center center;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     margin: 0;
 }
 
@@ -123,4 +124,24 @@ body {
 
 #completion-checkbox {
     margin-right: 5px;
+}
+
+
+
+
+.horizontal-corridor, .vertical-corridor {
+    background-color: gray;
+    visibility: hidden;
+}
+
+.horizontal-corridor {
+    width: 15px; /* Adjusted width for horizontal corridors */
+    height: 10px; /* Adjusted height for horizontal corridors */
+    grid-column: span 2; /* Span two columns */
+}
+
+.vertical-corridor {
+    width: 10px; /* Adjusted width for vertical corridors */
+    height: 15px; /* Adjusted height for vertical corridors */
+    grid-row: span 2; /* Span two rows */
 }
