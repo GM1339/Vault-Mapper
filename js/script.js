@@ -91,27 +91,19 @@ function setStartingRoom(direction) {
     switch (direction) {
 
         case 'north':
-
             startingRoom = { x: currentRoom.x, y: currentRoom.y - 1 };
-
             break;
-
+            
         case 'south':
-
             startingRoom = { x: currentRoom.x, y: currentRoom.y + 1 };
-
             break;
 
         case 'east':
-
             startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
-
             break;
 
         case 'west':
-
             startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
-
             break;
 
     }
@@ -134,7 +126,7 @@ function setStartingRoom(direction) {
 
 function toggleCompletion() {
     let currentRoomKey = `${playerPosition.x},${playerPosition.y}`;
-    let isChecked = document.getElementById('completion-checkbox').checked;
+
     roomData[currentRoomKey].completed = isChecked;
     markRoom(playerPosition.x, playerPosition.y);
 }
