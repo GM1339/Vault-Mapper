@@ -126,7 +126,7 @@ function setStartingRoom(direction) {
 
 function toggleCompletion() {
     let currentRoomKey = `${playerPosition.x},${playerPosition.y}`;
-
+    let isChecked = document.getElementById('completion-checkbox').checked;
     roomData[currentRoomKey].completed = isChecked;
     markRoom(playerPosition.x, playerPosition.y);
 }
@@ -190,7 +190,7 @@ function move(direction) {
     }
     markRoom(previousRoom.x, previousRoom.y);
     markPlayerPosition(playerPosition.x, playerPosition.y);
-    updateCompletion();
+    /* updateCompletion(); */
 
 }
 
