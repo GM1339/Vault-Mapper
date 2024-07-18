@@ -131,21 +131,3 @@ body {
 }
 
 
-
-
-.horizontal-corridor, .vertical-corridor {
-    background-color: gray;
-    visibility: hidden;
-}
-
-.horizontal-corridor {
-    width: 15px; /* Adjusted width for horizontal corridors */
-    height: 10px; /* Adjusted height for horizontal corridors */
-    grid-column: span 2; /* Span two columns */
-}
-
-.vertical-corridor {
-    width: 10px; /* Adjusted width for vertical corridors */
-    height: 15px; /* Adjusted height for vertical corridors */
-    grid-row: span 2; /* Span two rows */
-}
