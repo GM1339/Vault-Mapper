@@ -199,7 +199,7 @@ function move(direction) {
     markRoom(previousRoom.x, previousRoom.y);
     markPlayerPosition(playerPosition.x, playerPosition.y);
     updateCompletion();
-    document.getElementById('completion-checkbox').checked = roomData[`${playerPosition.x},${playerPosition.y}`].completed;
+
 }
 
 
