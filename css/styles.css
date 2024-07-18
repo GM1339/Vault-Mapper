@@ -106,10 +106,10 @@ body {
     border: 3px solid black; /* 3px black border for the player */
 }
 
-input[type="checkbox"] {
+/* removed input[type="checkbox"] {
     margin-left: 5px;
 }
-
+*/
 /* edited by GREG with gpt snippet */
 #completion-checkbox-container {
     position: fixed;
