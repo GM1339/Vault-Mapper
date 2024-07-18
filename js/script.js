@@ -187,6 +187,7 @@ function move(direction) {
     }
     if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
         roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
+        markRoom(startingRoom.x, startingRoom.y);
     }
     markRoom(previousRoom.x, previousRoom.y);
     markPlayerPosition(playerPosition.x, playerPosition.y);
