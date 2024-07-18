@@ -9,12 +9,6 @@ body {
     height: 100vh;
     margin: 0;
 }
-
-	@@ -124,3 +125,23 @@ body {
-#completion-checkbox {
-    margin-right: 5px;
-}
-
 #controls {
     position: fixed;
     bottom: 20px;
@@ -24,11 +18,9 @@ body {
     align-items: flex-end;
     z-index: 1;
 }
-
 #controls div {
     margin-bottom: 10px;
 }
-
 #controls button {
     width: 40px;
     height: 40px;
@@ -39,7 +31,6 @@ body {
     color: #fff;
     cursor: pointer;
 }
-
 #grid {
     display: grid;
     grid-template-columns: repeat(21, 37.5px); /* 25% reduction from 50px */
@@ -47,7 +38,6 @@ body {
     gap: 20px;
     margin-bottom: 60px; /* Adjust margin to accommodate controls */
 }
-
 .grid-cell {
     width: 37.5px; /* 25% reduction from 50px */
     height: 37.5px; /* 25% reduction from 50px */
@@ -58,22 +48,18 @@ body {
     justify-content: center;
     position: relative;
 }
-
 .grid-cell.discovered {
    /* background-color: #f0f0f0; /* Pale gray background for discovered rooms */
     border: 3px solid red; /* Red border for discovered rooms */
 }
-
 .grid-cell.completed {
     border-color: green !important; /* Green border for completed rooms */
 }
-
 .portal {
     background-color: gray;
     border: 2px solid white; /* White border for the Portal Room */
     position: relative;
 }
-
 .portal::after {
     content: '';
     width: 10px; /* Adjusted size for smaller rooms */
@@ -87,9 +73,6 @@ body {
     transform: translateX(-50%);
     border: 3px solid black; /* GREG Black border for the smaller rectangle */
 }
-
-
-
 /* edited by GREG with gpt snippet */
 @keyframes cycle-colors {
     0% { background-color: red; }
@@ -101,8 +84,6 @@ body {
     85% { background-color: violet; }
     100% { background-color: red; }
 }
-
-
 .player {
     width: 15px; /* Adjusted size for smaller rooms */
     height: 15px; /* Adjusted size for smaller rooms */
@@ -111,10 +92,10 @@ body {
     border: 3px solid black; /* 3px black border for the player */
 }
 
-/* removed input[type="checkbox"] {
+input[type="checkbox"] {
     margin-left: 5px;
 }
-*/
+
 /* edited by GREG with gpt snippet */
 #completion-checkbox-container {
     position: fixed;
@@ -125,9 +106,6 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
-
 #completion-checkbox {
     margin-right: 5px;
 }
-
-
