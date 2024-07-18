@@ -1,3 +1,27 @@
+let grid = document.getElementById('grid');
+
+let currentRoom = { x: 10, y: 10 }; // Starting at the center for a 21x21 grid
+
+let playerPosition = { x: 10, y: 10 }; // Start player in the center initially
+
+let roomData = {};
+
+let vaultSize = 21; // Change grid size to 21x21
+
+let portalFacing = null;
+
+let completedRooms = {};
+
+
+
+// Initialize Grid
+
+function initializeGrid() {
+
+    grid.innerHTML = '';
+
+    for (let y = 0; y < vaultSize; y++) {
+
         for (let x = 0; x < vaultSize; x++) {
 
             let cell = document.createElement('div');
@@ -35,7 +59,13 @@ function resetMap() {
     initializeGrid();
 
 }
-	@@ -69,15 +58,11 @@ function promptPortalFacing() {
+
+
+
+// Prompt user to set portal facing direction
+
+function promptPortalFacing() {
+
     let direction = prompt("Enter portal facing direction (north, south, east, west):").toLowerCase();
 
     while (!['north', 'south', 'east', 'west'].includes(direction)) {
@@ -51,9 +81,15 @@ function resetMap() {
 }
 
 
-	@@ -89,33 +74,29 @@
+
+// Set starting room based on portal facing direction
+
+function setStartingRoom(direction) {
+
     let startingRoom;
+
     switch (direction) {
+
         case 'north':
             startingRoom = { x: currentRoom.x, y: currentRoom.y - 1 };
             break;
@@ -61,12 +97,15 @@ function resetMap() {
         case 'south':
             startingRoom = { x: currentRoom.x, y: currentRoom.y + 1 };
             break;
+
         case 'east':
             startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
             break;
+
         case 'west':
             startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
             break;
+
     }
 
     playerPosition = { ...startingRoom }; // Set player position to the starting room
@@ -80,7 +119,25 @@ function resetMap() {
     markPortalRoom(currentRoom.x, currentRoom.y, direction);
 
 }
-	@@ -141,11 +122,8 @@ function toggleCompletion() {
+
+
+
+//next segment added by GREG
+
+function toggleCompletion() {
+    let currentRoomKey = `${playerPosition.x},${playerPosition.y}`;
+    let isChecked = document.getElementById('completion-checkbox').checked;
+    roomData[currentRoomKey].completed = isChecked;
+    markRoom(playerPosition.x, playerPosition.y);
+}
+
+
+
+
+
+
+
+
 // Function to mark portal room
 
 function markPortalRoom(x, y, direction) {
@@ -92,7 +149,15 @@ function markPortalRoom(x, y, direction) {
     cell.classList.add(direction);
 
 }
-	@@ -161,27 +139,19 @@ function move(direction) {
+
+
+
+// Function to move in the grid -edit by GREG with gpt snippet 2
+
+function move(direction) {
+
+    let previousRoom = { ...playerPosition };
+
     switch (direction) {
 
         case 'north':
@@ -120,7 +185,65 @@ function markPortalRoom(x, y, direction) {
             break;
 
     }
-	@@ -247,29 +217,23 @@ function redo() {
+    if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
+        roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
+    }
+    markRoom(playerPosition.x, playerPosition.y);
+    markPlayerPosition(playerPosition.x, playerPosition.y);
+    /* updateCompletion(); */
+
+}
+
+
+
+
+// Function to mark rooms- changed by GREG
+
+function markRoom(x, y) {
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    cell.style.visibility = 'visible';
+    cell.classList.add('discovered');
+    if (roomData[`${x},${y}`].completed) {
+        cell.classList.add('completed');
+    } else {
+        cell.classList.remove('completed');
+    }
+}
+
+
+
+// Function to mark player position edite by GREG with gpt snippet
+
+function markPlayerPosition(x, y) {
+    document.querySelectorAll('.player').forEach(player => player.remove()); // Remove previous player icons
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    cell.innerHTML = `<div class="player" style="border: 3px solid black;"></div>`;
+}
+
+
+
+// Undo move
+
+function undo() {
+
+    // Implement your undo logic here
+
+}
+
+
+
+// Redo move
+
+function redo() {
+
+    // Implement your redo logic here
+
+}
+
+
+
+// Update room completion status
+
 function updateCompletion() {
 
     let cell = grid.querySelector(`[data-x="${playerPosition.x}"][data-y="${playerPosition.y}"]`);
@@ -150,8 +273,12 @@ function updateCompletion() {
     });
     cell.appendChild(checkbox);
 }
+
 // Initialize the map on load
 resetMap();
+
+
+
 document.addEventListener('keydown', (event) => {
     const key = event.key.toLowerCase();
     if (['w', 'arrowup'].includes(key)) move('north');
