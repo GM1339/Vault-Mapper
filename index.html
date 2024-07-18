@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
     <title>Vault Hunters Map</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="grid"></div>
     <div id="controls">
-        <button onclick="move('north')">N</button>
-        <button onclick="move('west')">W</button>
-        <button onclick="move('east')">E</button>
-        <button onclick="move('south')">S</button>
-        <button onclick="undo()">Undo</button>
-        <button onclick="redo()">Redo</button>
+        <div>
+            <button onclick="move('north')">N</button>
+        </div>
+        <div>
+            <button onclick="move('west')">W</button>
+            <button onclick="move('east')">E</button>
+        </div>
+        <div>
+            <button onclick="move('south')">S</button>
+        </div>
+        <div>
+            <button onclick="undo()">Undo</button>
+            <button onclick="redo()">Redo</button>
+        </div>
     </div>
-    <div id="completion">
-        <label><input type="checkbox" id="completion-checkbox"> Room Completed</label>
-    </div>
+    <div id="grid"></div>
     <script src="js/script.js"></script>
+
+<div id="completion-checkbox-container">
+    <input type="checkbox" id="completion-checkbox" onclick="toggleCompletion()"> Room Completed
+</div> //added by GREG
+    
 </body>
 </html>
