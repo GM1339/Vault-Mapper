@@ -84,7 +84,22 @@ body {
     transition: box-shadow 0.3s ease, color 0.3s ease;
 }
 
-.direction-button.active {
+.direction-button.active-north {
+    color: #fff;
+    box-shadow: 0 0 10px #fff;
+}
+
+.direction-button.active-west {
+    color: #fff;
+    box-shadow: 0 0 10px #fff;
+}
+
+.direction-button.active-east {
+    color: #fff;
+    box-shadow: 0 0 10px #fff;
+}
+
+.direction-button.active-south {
     color: #fff;
     box-shadow: 0 0 10px #fff;
 }
