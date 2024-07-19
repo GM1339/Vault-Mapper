@@ -1,29 +1,22 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 #grid {
     display: grid;
-    grid-template-columns: repeat(21, 30px); /* Adjust for 21x21 grid */
-    grid-template-rows: repeat(21, 30px); /* Adjust for 21x21 grid */
-    gap: 5px; /* Add some space between cells */
+    grid-template-columns: repeat(21, 35px); /* Adjust for 21x21 grid */
+    grid-template-rows: repeat(21, 35px); /* Adjust for 21x21 grid */
+    gap: 30px; /* No gap between cells */
     margin-bottom: 20px;
 }
 
 .grid-cell {
-    width: 30px; /* Cell width */
-    height: 30px; /* Cell height */
-    border: 1px solid #ddd; /* Cell border */
+    width: 35px; /* Cell width */
+    height: 35px; /* Cell height */
+    border: 2px solid #ddd; /* Cell border */
     visibility: hidden; /* Initially hide cells */
 }
 
 .discovered {
     visibility: visible; /* Make discovered cells visible */
     background-color: #eee; /* Background color for discovered cells */
-    border: 1px solid red; /* Border color for discovered cells */
+    border: 2px solid red; /* Border color for discovered cells */
 }
 
 .completed {
@@ -31,7 +24,7 @@ body {
 }
 
 .portal {
-    background-color: #888; /* Background color for portal cell */
+    background-color: #eee; /* Background color for portal cell */
 }
 
 .portal.north {
@@ -63,6 +56,8 @@ body {
 .corridor {
     position: absolute;
     background-color: gray; /* Background color for corridors */
+    width: 30px; /* Corridor width */
+    height: 30px; /* Corridor height */
 }
 
 #controls {
