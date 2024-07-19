@@ -71,6 +71,26 @@ body {
     justify-content: center;
     position: relative;
 }
+
+
+.direction-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.direction-button.active {
+    color: #fff;
+    box-shadow: 0 0 10px #fff;
+}
+
+
+
 .grid-cell.discovered {
    /* background-color: #f0f0f0; /* Pale gray background for discovered rooms */
     border: 3px solid red; /* Red border for discovered rooms */
