@@ -56,7 +56,7 @@ function setStartingRoom(direction) {
             startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
             break;
         case 'west':
-            startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
+            startingRoom = { x: currentRoom.x - 1 };
             break;
     }
     playerPosition = { ...startingRoom }; // Set player position to the starting room
@@ -120,31 +120,39 @@ function markRoom(x, y) {
 
 // Function to mark player position
 function markPlayerPosition(x, y) {
-    document.querySelectorAll('.player').forEach(player => player.remove()); // Remove previous player icons
+    let playerIcon = document.createElement('div'); // Create player icon element
+    playerIcon.className = 'player'; // Add player class
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`); // Get the cell element
-    cell.innerHTML = `<div class="player" style="border: 3px solid black;"></div>`; // Add player icon
+    cell.appendChild(playerIcon); // Append player icon to the cell
 }
 
 // Function to create corridors
-function createCorridor(start, end) {
-    let corridor = document.createElement('div'); // Create a new corridor element
+function createCorridor(from, to) {
+    let fromCell = grid.querySelector(`[data-x="${from.x}"][data-y="${from.y}"]`); // Get the from cell element
+    let toCell = grid.querySelector(`[data-x="${to.x}"][data-y="${to.y}"]`); // Get the to cell element
+
+    let corridor = document.createElement('div'); // Create corridor element
     corridor.className = 'corridor'; // Add corridor class
 
-    if (start.x === end.x) {
-        // Vertical corridor
-        corridor.style.width = '15px'; // Corridor width
-        corridor.style.height = '50px'; // Corridor height (adjust to the grid size)
-        corridor.style.left = `${start.x * 35 + 10}px`; // Adjust left position
-        corridor.style.top = `${Math.min(start.y, end.y) * 35 + 35}px`; // Adjust top position
-    } else if (start.y === end.y) {
-        // Horizontal corridor
-        corridor.style.width = '50px'; // Corridor width (adjust to the grid size)
-        corridor.style.height = '15px'; // Corridor height
-        corridor.style.left = `${Math.min(start.x, end.x) * 35 + 35}px`; // Adjust left position
-        corridor.style.top = `${start.y * 35 + 10}px`; // Adjust top position
+    if (from.x === to.x) {
+        corridor.style.width = '30px'; // Set width for vertical corridor
+        corridor.style.height = '30px'; // Set height for vertical corridor
+        if (from.y < to.y) {
+            corridor.style.top = '30px'; // Position for south direction
+        } else {
+            corridor.style.top = '-30px'; // Position for north direction
+        }
+    } else if (from.y === to.y) {
+        corridor.style.width = '30px'; // Set width for horizontal corridor
+        corridor.style.height = '30px'; // Set height for horizontal corridor
+        if (from.x < to.x) {
+            corridor.style.left = '30px'; // Position for east direction
+        } else {
+            corridor.style.left = '-30px'; // Position for west direction
+        }
     }
 
-    grid.appendChild(corridor); // Append corridor to the grid
+    fromCell.appendChild(corridor); // Append corridor to the from cell
 }
 
 // Undo move
