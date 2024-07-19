@@ -1,7 +1,8 @@
 let grid = document.getElementById('grid');
 
-let currentRoom = { x: 10, y: 10 }; // Starting at the center for a 21x21 grid
-let playerPosition = { x: 10, y: 10 }; // Start player in the center initially
+// Initialize the starting room at the center
+let currentRoom = { x: 10, y: 10 };
+let playerPosition = { x: 10, y: 10 };
 let roomData = {};
 let vaultSize = 21; // Change grid size to 21x21
 let portalFacing = null;
@@ -38,31 +39,33 @@ function promptPortalFacing() {
         direction = prompt("Invalid direction. Enter portal facing direction (north, south, east, west):").toLowerCase();
     }
     portalFacing = direction;
-    setStartingRoom(direction);
+    setStartingRoomAndPortalArea(direction);
 }
 
-// Set starting room based on portal facing direction
-function setStartingRoom(direction) {
-    let startingRoom;
+// Set starting room and portal area based on portal facing direction
+function setStartingRoomAndPortalArea(direction) {
+    let portalArea;
     switch (direction) {
         case 'north':
-            startingRoom = { x: currentRoom.x, y: currentRoom.y - 1 };
+            portalArea = { x: currentRoom.x, y: currentRoom.y + 1 };
             break;
         case 'south':
-            startingRoom = { x: currentRoom.x, y: currentRoom.y + 1 };
+            portalArea = { x: currentRoom.x, y: currentRoom.y - 1 };
             break;
         case 'east':
-            startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
+            portalArea = { x: currentRoom.x - 1, y: currentRoom.y };
             break;
         case 'west':
-            startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
+            portalArea = { x: currentRoom.x + 1, y: currentRoom.y };
             break;
     }
-    playerPosition = { ...startingRoom }; // Set player position to the starting room
-    roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false };
-    markRoom(startingRoom.x, startingRoom.y);
-    markPlayerPosition(startingRoom.x, startingRoom.y);
-    markPortalRoom(currentRoom.x, currentRoom.y, direction);
+    // Mark starting room and portal area
+    playerPosition = { ...currentRoom };
+    roomData[`${currentRoom.x},${currentRoom.y}`] = { type: 'normal', discovered: true, completed: false };
+    roomData[`${portalArea.x},${portalArea.y}`] = { type: 'portal', discovered: true, completed: false };
+    markRoom(currentRoom.x, currentRoom.y);
+    markRoom(portalArea.x, portalArea.y, true); // Mark as portal area
+    markPlayerPosition(currentRoom.x, currentRoom.y);
 }
 
 // Function to toggle room completion
@@ -75,29 +78,22 @@ function toggleCompletion() {
     }
 }
 
-// Function to mark portal room
-function markPortalRoom(x, y, direction) {
-    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-    cell.classList.add('portal');
-    cell.classList.add(direction);
-}
-
 // Function to move in the grid
 function move(direction) {
     let previousRoom = { ...playerPosition };
 
     switch (direction) {
         case 'north':
-            if (playerPosition.y > 0 && !(playerPosition.x === currentRoom.x && playerPosition.y - 1 === currentRoom.y)) playerPosition.y--;
+            if (playerPosition.y > 0) playerPosition.y--;
             break;
         case 'south':
-            if (playerPosition.y < vaultSize - 1 && !(playerPosition.x === currentRoom.x && playerPosition.y + 1 === currentRoom.y)) playerPosition.y++;
+            if (playerPosition.y < vaultSize - 1) playerPosition.y++;
             break;
         case 'east':
-            if (playerPosition.x < vaultSize - 1 && !(playerPosition.x + 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x++;
+            if (playerPosition.x < vaultSize - 1) playerPosition.x++;
             break;
         case 'west':
-            if (playerPosition.x > 0 && !(playerPosition.x - 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x--;
+            if (playerPosition.x > 0) playerPosition.x--;
             break;
     }
 
@@ -110,10 +106,13 @@ function move(direction) {
 }
 
 // Function to mark rooms
-function markRoom(x, y) {
+function markRoom(x, y, isPortalArea = false) {
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     cell.style.visibility = 'visible';
     cell.classList.add('discovered');
+    if (isPortalArea) {
+        cell.classList.add('portal-area');
+    }
     if (roomData[`${x},${y}`].completed) {
         cell.classList.add('completed');
     } else {
@@ -125,7 +124,7 @@ function markRoom(x, y) {
 function markPlayerPosition(x, y) {
     document.querySelectorAll('.player').forEach(player => player.remove()); // Remove previous player icons
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-    cell.innerHTML = '<div class="player" style="border: 3px solid black;"></div>';
+    cell.innerHTML = '<div class="player"></div>';
 }
 
 // Undo move
