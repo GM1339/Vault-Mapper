@@ -36,6 +36,7 @@ body {
 }
 
 #grid {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(21, 35px); /* 25% reduction from 50px */
     grid-template-rows: repeat(21, 35px);    /* 25% reduction from 50px */
@@ -63,8 +64,12 @@ body {
     border-color: green !important; /* Green border for completed rooms */
 }
 
-.grid-cell.portal-area {
+.portal-area-icon {
+    position: absolute;
+    width: 17.5px; /* Half the size of a normal room */
+    height: 17.5px; /* Half the size of a normal room */
     background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet);
+    border-radius: 50%; /* Circle shape */
 }
 
 .player {
