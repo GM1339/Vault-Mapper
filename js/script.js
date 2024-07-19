@@ -57,11 +57,6 @@ function setStartingRoom(direction) {
         case 'west':
             startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
             break;
-
-
-    // Add glow effect to the clicked button
-    activateButton(direction);
-            
     }
     playerPosition = { ...startingRoom }; // Set player position to the starting room
     roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false };
@@ -133,66 +128,23 @@ function markPlayerPosition(x, y) {
     cell.innerHTML = '<div class="player" style="border: 3px solid black;"></div>';
 }
 
+// Undo move
+function undo() {
+    // Implement your undo logic here
+}
 
+// Redo move
+function redo() {
+    // Implement your redo logic here
+}
 
-
-
-// Function to activate the button with a glow effect
-
-function activateButton(direction) {
-
-    // Remove active class from all buttons
-
-    document.querySelectorAll('.direction-button').forEach(btn => {
-
-        btn.classList.remove('active-north', 'active-west', 'active-east', 'active-south');
-
-    });
-
-
-
-    // Add active class to the corresponding button
-
-    const button = document.querySelector(`#${direction} .direction-button`);
-
-    if (button) {
-
-        button.classList.add(`active-${direction}`);
-
-
-
-        // Remove the active class after a short delay to simulate the glow effect
-
-        setTimeout(() => {
-
-            button.classList.remove(`active-${direction}`);
-
-        }, 300);
-
-    }
-
-
-    
-    
 // Initialize the map on load
-
 resetMap();
 
 document.addEventListener('keydown', (event) => {
-
     const key = event.key.toLowerCase();
-
-    if (['w', 'arrowup'].includes(key)) {
-        move('north', document.querySelector('#north .direction-button'));
-
-    } else if (['a', 'arrowleft'].includes(key)) {
-        move('west', document.querySelector('#west .direction-button'));
-
-    } else if (['s', 'arrowdown'].includes(key)) {
-        move('south', document.querySelector('#south .direction-button'));
-
-    } else if (['d', 'arrowright'].includes(key)) {
-        move('east', document.querySelector('#east .direction-button'));
-
-    }
+    if (['w', 'arrowup'].includes(key)) move('north');
+    if (['a', 'arrowleft'].includes(key)) move('west');
+    if (['s', 'arrowdown'].includes(key)) move('south');
+    if (['d', 'arrowright'].includes(key)) move('east');
 });
