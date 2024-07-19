@@ -9,7 +9,6 @@ body {
     height: 100vh;
     margin: 0;
 }
-
 #controls {
     position: fixed;
     bottom: 20px;
@@ -19,11 +18,9 @@ body {
     align-items: flex-end;
     z-index: 1;
 }
-
 #controls div {
     margin-bottom: 10px;
 }
-
 #controls button {
     width: 40px;
     height: 40px;
@@ -34,16 +31,13 @@ body {
     color: #fff;
     cursor: pointer;
 }
-
 #grid {
-    position: relative;
     display: grid;
     grid-template-columns: repeat(21, 35px); /* 25% reduction from 50px */
     grid-template-rows: repeat(21, 35px);    /* 25% reduction from 50px */
     gap: 30px;
     margin-bottom: 60px; /* Adjust margin to accommodate controls */
 }
-
 .grid-cell {
     width: 35px; /* 25% reduction from 50px */
     height: 35px; /* 25% reduction from 50px */
@@ -54,24 +48,42 @@ body {
     justify-content: center;
     position: relative;
 }
-
 .grid-cell.discovered {
-    background-color: #f0f0f0; /* Pale gray background for discovered rooms */
+   /* background-color: #f0f0f0; /* Pale gray background for discovered rooms */
     border: 3px solid red; /* Red border for discovered rooms */
 }
-
 .grid-cell.completed {
     border-color: green !important; /* Green border for completed rooms */
 }
-
-.portal-area-icon {
-    position: absolute;
-    width: 17.5px; /* Half the size of a normal room */
-    height: 17.5px; /* Half the size of a normal room */
-    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet);
-    border-radius: 50%; /* Circle shape */
+.portal {
+    background-color: gray;
+    border: 2px solid white; /* White border for the Portal Room */
+    position: relative;
 }
-
+.portal::after {
+    content: '';
+    width: 10px; /* Adjusted size for smaller rooms */
+    height: 20px; /* Adjusted size for smaller rooms */
+    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
+    background-size: 400%;
+    animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*/
+    position: absolute;
+    bottom: 4px; /*GREG Adjusted position for smaller rooms */
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid black; /* GREG Black border for the smaller rectangle */
+}
+/* edited by GREG with gpt snippet */
+@keyframes cycle-colors {
+    0% { background-color: red; }
+    14% { background-color: orange; }
+    28% { background-color: yellow; }
+    42% { background-color: green; }
+    57% { background-color: blue; }
+    71% { background-color: indigo; }
+    85% { background-color: violet; }
+    100% { background-color: red; }
+}
 .player {
     width: 15px; /* Adjusted size for smaller rooms */
     height: 15px; /* Adjusted size for smaller rooms */
@@ -84,6 +96,7 @@ input[type="checkbox"] {
     margin-left: 5px;
 }
 
+/* edited by GREG with gpt snippet */
 #completion-checkbox-container {
     position: fixed;
     bottom: 10px;
@@ -93,7 +106,6 @@ input[type="checkbox"] {
     padding: 10px;
     border-radius: 5px;
 }
-
 #completion-checkbox {
     margin-right: 5px;
 }
