@@ -33,14 +33,14 @@ body {
 }
 #grid {
     display: grid;
-    grid-template-columns: repeat(21, 37.5px); /* 25% reduction from 50px */
-    grid-template-rows: repeat(21, 37.5px);    /* 25% reduction from 50px */
-    gap: 20px;
+    grid-template-columns: repeat(21, 35px); /* 25% reduction from 50px */
+    grid-template-rows: repeat(21, 40px);    /* 25% reduction from 50px */
+    gap: 30px;
     margin-bottom: 60px; /* Adjust margin to accommodate controls */
 }
 .grid-cell {
-    width: 37.5px; /* 25% reduction from 50px */
-    height: 37.5px; /* 25% reduction from 50px */
+    width: 35px; /* 25% reduction from 50px */
+    height: 35px; /* 25% reduction from 50px */
     background-color: transparent;
     border: none; /* No initial border */
     display: flex;
