@@ -65,15 +65,15 @@ function setStartingRoom(direction) {
     markPortalRoom(currentRoom.x, currentRoom.y, direction);
 }
 
-// Function to toggle room completion
+// Function to toggle room completion status
 function toggleCompletion() {
     let currentRoomKey = `${playerPosition.x},${playerPosition.y}`;
-    let isChecked = document.getElementById('completion-checkbox').checked;
     if (roomData[currentRoomKey]) {
-        roomData[currentRoomKey].completed = isChecked;
+        roomData[currentRoomKey].completed = !roomData[currentRoomKey].completed; // Toggle completion status
         markRoom(playerPosition.x, playerPosition.y);
     }
 }
+
 
 // Function to mark portal room
 function markPortalRoom(x, y, direction) {
