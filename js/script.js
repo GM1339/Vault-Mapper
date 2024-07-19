@@ -1,8 +1,7 @@
 let grid = document.getElementById('grid');
 
-// Initialize the starting room at the center
-let currentRoom = { x: 10, y: 10 };
-let playerPosition = { x: 10, y: 10 };
+let currentRoom = { x: 10, y: 10 }; // Starting at the center for a 21x21 grid
+let playerPosition = { x: 10, y: 10 }; // Start player in the center initially
 let roomData = {};
 let vaultSize = 21; // Change grid size to 21x21
 let portalFacing = null;
@@ -39,41 +38,31 @@ function promptPortalFacing() {
         direction = prompt("Invalid direction. Enter portal facing direction (north, south, east, west):").toLowerCase();
     }
     portalFacing = direction;
-    setStartingRoomAndPortalArea(direction);
+    setStartingRoom(direction);
 }
 
-// Set starting room and portal area based on portal facing direction
-function setStartingRoomAndPortalArea(direction) {
-    let portalArea;
-    let portalIcon = document.createElement('div');
-    portalIcon.className = 'portal-area-icon';
-
+// Set starting room based on portal facing direction
+function setStartingRoom(direction) {
+    let startingRoom;
     switch (direction) {
         case 'north':
-            portalArea = { x: currentRoom.x, y: currentRoom.y + 0.5 };
+            startingRoom = { x: currentRoom.x, y: currentRoom.y - 1 };
             break;
         case 'south':
-            portalArea = { x: currentRoom.x, y: currentRoom.y - 0.5 };
+            startingRoom = { x: currentRoom.x, y: currentRoom.y + 1 };
             break;
         case 'east':
-            portalArea = { x: currentRoom.x - 0.5, y: currentRoom.y };
+            startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
             break;
         case 'west':
-            portalArea = { x: currentRoom.x + 0.5, y: currentRoom.y };
+            startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
             break;
     }
-
-    // Mark starting room
-    playerPosition = { ...currentRoom };
-    roomData[`${currentRoom.x},${currentRoom.y}`] = { type: 'normal', discovered: true, completed: false };
-    markRoom(currentRoom.x, currentRoom.y);
-
-    // Position the portal icon in the grid
-    portalIcon.style.left = `${portalArea.x * 35}px`;
-    portalIcon.style.top = `${portalArea.y * 35}px`;
-    grid.appendChild(portalIcon);
-
-    markPlayerPosition(currentRoom.x, currentRoom.y);
+    playerPosition = { ...startingRoom }; // Set player position to the starting room
+    roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false };
+    markRoom(startingRoom.x, startingRoom.y);
+    markPlayerPosition(startingRoom.x, startingRoom.y);
+    markPortalRoom(currentRoom.x, currentRoom.y, direction);
 }
 
 // Function to toggle room completion
@@ -86,22 +75,29 @@ function toggleCompletion() {
     }
 }
 
+// Function to mark portal room
+function markPortalRoom(x, y, direction) {
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    cell.classList.add('portal');
+    cell.classList.add(direction);
+}
+
 // Function to move in the grid
 function move(direction) {
     let previousRoom = { ...playerPosition };
 
     switch (direction) {
         case 'north':
-            if (playerPosition.y > 0) playerPosition.y--;
+            if (playerPosition.y > 0 && !(playerPosition.x === currentRoom.x && playerPosition.y - 1 === currentRoom.y)) playerPosition.y--;
             break;
         case 'south':
-            if (playerPosition.y < vaultSize - 1) playerPosition.y++;
+            if (playerPosition.y < vaultSize - 1 && !(playerPosition.x === currentRoom.x && playerPosition.y + 1 === currentRoom.y)) playerPosition.y++;
             break;
         case 'east':
-            if (playerPosition.x < vaultSize - 1) playerPosition.x++;
+            if (playerPosition.x < vaultSize - 1 && !(playerPosition.x + 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x++;
             break;
         case 'west':
-            if (playerPosition.x > 0) playerPosition.x--;
+            if (playerPosition.x > 0 && !(playerPosition.x - 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x--;
             break;
     }
 
@@ -129,7 +125,7 @@ function markRoom(x, y) {
 function markPlayerPosition(x, y) {
     document.querySelectorAll('.player').forEach(player => player.remove()); // Remove previous player icons
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-    cell.innerHTML = '<div class="player"></div>';
+    cell.innerHTML = '<div class="player" style="border: 3px solid black;"></div>';
 }
 
 // Undo move
