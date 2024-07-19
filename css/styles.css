@@ -20,7 +20,7 @@ body {
 #north, #south {
     position: absolute;
     left: 50%;
-    transform: translateX(-25%);
+    transform: translateX(-50%);
 }
 
 #north {
