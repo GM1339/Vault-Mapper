@@ -92,12 +92,7 @@ body {
     border: 3px solid black; /* 3px black border for the player */
 }
 
-input[type="checkbox"] {
-    margin-left: 5px;
-}
-
-/* edited by GREG with gpt snippet */
-#completion-checkbox-container {
+#completion-toggle-container {
     position: fixed;
     bottom: 10px;
     left: 50%;
@@ -106,6 +101,18 @@ input[type="checkbox"] {
     padding: 10px;
     border-radius: 5px;
 }
-#completion-checkbox {
-    margin-right: 5px;
+
+#completion-toggle {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
 }
+
+#completion-toggle:hover {
+    background-color: #555;
+}
+
