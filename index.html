@@ -1,32 +1,33 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vault Hunters Map</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to the CSS file -->
 </head>
 <body>
-    <div id="controls">
+    <div id="controls"> <!-- Container for the movement and action buttons -->
         <div>
-            <button onclick="move('north')">N</button>
+            <button onclick="move('north')">N</button> <!-- Move north button -->
         </div>
         <div>
-            <button onclick="move('west')">W</button>
-            <button onclick="move('east')">E</button>
+            <button onclick="move('west')">W</button> <!-- Move west button -->
+            <button onclick="move('east')">E</button> <!-- Move east button -->
         </div>
         <div>
-            <button onclick="move('south')">S</button>
+            <button onclick="move('south')">S</button> <!-- Move south button -->
         </div>
         <div>
-            <button onclick="undo()">Undo</button>
-            <button onclick="redo()">Redo</button>
+            <button onclick="undo()">Undo</button> <!-- Undo button -->
+            <button onclick="redo()">Redo</button> <!-- Redo button -->
         </div>
     </div>
-    <div id="grid"></div>
-    <script src="js/script.js"></script>
+    <div id="grid"></div> <!-- Container for the grid -->
+    <script src="js/script.js"></script> <!-- Link to the JavaScript file -->
 
-<div id="completion-checkbox-container">
-    <input type="checkbox" id="completion-checkbox" onclick="toggleCompletion()"> Room Completed
-    
+    <div id="completion-checkbox-container">
+        <input type="checkbox" id="completion-checkbox" onclick="toggleCompletion()"> Room Completed <!-- Checkbox for room completion -->
+    </div>
 </body>
 </html>
