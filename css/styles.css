@@ -1,124 +1,104 @@
 body {
-    background-color: #1C1C1C;
-    color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
 }
-#controls {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 1;
-}
-#controls div {
-    margin-bottom: 10px;
-}
-#controls button {
-    width: 40px;
-    height: 40px;
-    margin: 5px;
-    font-size: 16px;
-    border: none;
-    background-color: #444;
-    color: #fff;
-    cursor: pointer;
-}
+
 #grid {
     display: grid;
-    grid-template-columns: repeat(21, 35px); /* 25% reduction from 50px */
-    grid-template-rows: repeat(21, 40px);    /* 25% reduction from 50px */
-    gap: 30px;
-    margin-bottom: 60px; /* Adjust margin to accommodate controls */
+    grid-template-columns: repeat(21, 30px); /* Adjust for 21x21 grid */
+    grid-template-rows: repeat(21, 30px); /* Adjust for 21x21 grid */
+    gap: 5px; /* Add some space between cells */
+    margin-bottom: 20px;
 }
+
 .grid-cell {
-    width: 35px; /* 25% reduction from 50px */
-    height: 35px; /* 25% reduction from 50px */
-    background-color: transparent;
-    border: none; /* No initial border */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    width: 30px; /* Cell width */
+    height: 30px; /* Cell height */
+    border: 1px solid #ddd; /* Cell border */
+    visibility: hidden; /* Initially hide cells */
 }
-.grid-cell.discovered {
-   /* background-color: #f0f0f0; /* Pale gray background for discovered rooms */
-    border: 3px solid red; /* Red border for discovered rooms */
+
+.discovered {
+    visibility: visible; /* Make discovered cells visible */
+    background-color: #eee; /* Background color for discovered cells */
+    border: 1px solid red; /* Border color for discovered cells */
 }
-.grid-cell.completed {
-    border-color: green !important; /* Green border for completed rooms */
+
+.completed {
+    border-color: green !important; /* Border color for completed cells */
 }
+
 .portal {
-    background-color: gray;
-    border: 2px solid white; /* White border for the Portal Room */
-    position: relative;
+    background-color: #888; /* Background color for portal cell */
 }
-.portal::after {
-    content: '';
-    width: 10px; /* Adjusted size for smaller rooms */
-    height: 20px; /* Adjusted size for smaller rooms */
-    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
-    background-size: 400%;
-    animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*/
-    position: absolute;
-    bottom: 4px; /*GREG Adjusted position for smaller rooms */
-    left: 50%;
-    transform: translateX(-50%);
-    border: 3px solid black; /* GREG Black border for the smaller rectangle */
+
+.portal.north {
+    border-bottom: none; /* Remove bottom border for north facing portal */
 }
-/* edited by GREG with gpt snippet */
-@keyframes cycle-colors {
-    0% { background-color: red; }
-    14% { background-color: orange; }
-    28% { background-color: yellow; }
-    42% { background-color: green; }
-    57% { background-color: blue; }
-    71% { background-color: indigo; }
-    85% { background-color: violet; }
-    100% { background-color: red; }
+
+.portal.south {
+    border-top: none; /* Remove top border for south facing portal */
 }
+
+.portal.east {
+    border-left: none; /* Remove left border for east facing portal */
+}
+
+.portal.west {
+    border-right: none; /* Remove right border for west facing portal */
+}
+
 .player {
-    width: 15px; /* Adjusted size for smaller rooms */
-    height: 15px; /* Adjusted size for smaller rooms */
-    background-color: white;
-    border-radius: 50%; /* Circle shape */
-    border: 3px solid black; /* 3px black border for the player */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%; /* Make player icon circular */
+    background-color: white; /* Background color for player icon */
+    margin: auto;
+    position: relative;
+    top: 10px; /* Center player icon vertically */
 }
-
-
 
 .corridor {
     position: absolute;
-    background-color: lightgray;
-    z-index: -1; /* Ensure it appears below rooms */
+    background-color: gray; /* Background color for corridors */
 }
 
-
-
-
-
-
-input[type="checkbox"] {
-    margin-left: 5px;
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-/* edited by GREG with gpt snippet */
+#controls button {
+    padding: 5px 10px;
+    margin: 5px;
+    border: none;
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    cursor: pointer;
+    border-radius: 5px; /* Button border radius */
+}
+
+#controls button:disabled {
+    background-color: #ccc; /* Disabled button background color */
+    cursor: not-allowed;
+}
+
+#controls div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #completion-checkbox-container {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    padding: 10px;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
 }
+
 #completion-checkbox {
     margin-right: 5px;
 }
