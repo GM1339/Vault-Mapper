@@ -45,26 +45,34 @@ function promptPortalFacing() {
 // Set starting room and portal area based on portal facing direction
 function setStartingRoomAndPortalArea(direction) {
     let portalArea;
+    let portalIcon = document.createElement('div');
+    portalIcon.className = 'portal-area-icon';
+
     switch (direction) {
         case 'north':
-            portalArea = { x: currentRoom.x, y: currentRoom.y + 1 };
+            portalArea = { x: currentRoom.x, y: currentRoom.y + 0.5 };
             break;
         case 'south':
-            portalArea = { x: currentRoom.x, y: currentRoom.y - 1 };
+            portalArea = { x: currentRoom.x, y: currentRoom.y - 0.5 };
             break;
         case 'east':
-            portalArea = { x: currentRoom.x - 1, y: currentRoom.y };
+            portalArea = { x: currentRoom.x - 0.5, y: currentRoom.y };
             break;
         case 'west':
-            portalArea = { x: currentRoom.x + 1, y: currentRoom.y };
+            portalArea = { x: currentRoom.x + 0.5, y: currentRoom.y };
             break;
     }
-    // Mark starting room and portal area
+
+    // Mark starting room
     playerPosition = { ...currentRoom };
     roomData[`${currentRoom.x},${currentRoom.y}`] = { type: 'normal', discovered: true, completed: false };
-    roomData[`${portalArea.x},${portalArea.y}`] = { type: 'portal', discovered: true, completed: false };
     markRoom(currentRoom.x, currentRoom.y);
-    markRoom(portalArea.x, portalArea.y, true); // Mark as portal area
+
+    // Position the portal icon in the grid
+    portalIcon.style.left = `${portalArea.x * 35}px`;
+    portalIcon.style.top = `${portalArea.y * 35}px`;
+    grid.appendChild(portalIcon);
+
     markPlayerPosition(currentRoom.x, currentRoom.y);
 }
 
@@ -106,13 +114,10 @@ function move(direction) {
 }
 
 // Function to mark rooms
-function markRoom(x, y, isPortalArea = false) {
+function markRoom(x, y) {
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     cell.style.visibility = 'visible';
     cell.classList.add('discovered');
-    if (isPortalArea) {
-        cell.classList.add('portal-area');
-    }
     if (roomData[`${x},${y}`].completed) {
         cell.classList.add('completed');
     } else {
