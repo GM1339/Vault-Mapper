@@ -12,7 +12,27 @@ let portalFacing = null;
 
 let completedRooms = {};
 
+function createCorridor(x1, y1, x2, y2) {
+    const corridor = document.createElement('div');
+    corridor.classList.add('corridor');
 
+    // Determine corridor orientation and position
+    if (x1 === x2) {
+        // Vertical corridor
+        corridor.style.width = '18.75px'; // Half the width of a room
+        corridor.style.height = '37.5px'; // Full height of a room
+        corridor.style.left = `${x1 * (37.5 + 10) + 9.375}px`; // Centered between rooms
+        corridor.style.top = `${Math.min(y1, y2) * (37.5 + 10) + 37.5}px`; // Between the two rooms
+    } else if (y1 === y2) {
+        // Horizontal corridor
+        corridor.style.width = '37.5px'; // Full width of a room
+        corridor.style.height = '18.75px'; // Half the height of a room
+        corridor.style.left = `${Math.min(x1, x2) * (37.5 + 10) + 37.5}px`; // Between the two rooms
+        corridor.style.top = `${y1 * (37.5 + 10) + 9.375}px`; // Centered between rooms
+    }
+
+    document.getElementById('grid-container').appendChild(corridor);
+}
 
 // Initialize Grid
 
@@ -68,31 +88,9 @@ function markRoom(x, y) {
     }
 }
 
-    // Show corridors if both rooms are discovered
-    showCorridors(x, y);
 }
 
-function showCorridors(x, y) {
-    // Check and show horizontal corridors
-    let horizontalCorridor = grid.querySelector(`.horizontal-corridor[data-start-x="${x}"][data-start-y="${y}"]`);
-    if (horizontalCorridor) {
-        let endX = parseInt(horizontalCorridor.dataset.endX);
-        let endY = parseInt(horizontalCorridor.dataset.endY);
-        if (roomData[`${endX},${endY}`]?.discovered) {
-            horizontalCorridor.style.visibility = 'visible';
-        }
-    }
-
-    // Check and show vertical corridors
-    let verticalCorridor = grid.querySelector(`.vertical-corridor[data-start-x="${x}"][data-start-y="${y}"]`);
-    if (verticalCorridor) {
-        let endX = parseInt(verticalCorridor.dataset.endX);
-        let endY = parseInt(verticalCorridor.dataset.endY);
-        if (roomData[`${endX},${endY}`]?.discovered) {
-            verticalCorridor.style.visibility = 'visible';
-        }
-    }
-}
+ createCorridor(x, y, nextX, nextY);
 
 // Reset Map
 
