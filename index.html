@@ -7,21 +7,13 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="controls">
-        <div>
-            <button onclick="move('north')">N</button>
-        </div>
-        <div>
-            <button onclick="move('west')">W</button>
-            <button onclick="move('east')">E</button>
-        </div>
-        <div>
-            <button onclick="move('south')">S</button>
-        </div>
-        <div>
-            <button onclick="undo()">Undo</button>
-            <button onclick="redo()">Redo</button>
-        </div>
+   <div id="controls">
+    <div class="control-button" id="north"><button onclick="move('north')">N</button></div>
+    <div class="control-button" id="west"><button onclick="move('west')">W</button></div>
+    <div class="control-button" id="east"><button onclick="move('east')">E</button></div>
+    <div class="control-button" id="south"><button onclick="move('south')">S</button></div>
+    <div class="control-center"></div>
+</div>
     </div>
     <div id="grid"></div>
     <div id="completion-toggle-container">
