@@ -17,34 +17,82 @@ let completedRooms = {};
 // Initialize Grid
 
 function initializeGrid() {
-
     grid.innerHTML = '';
-
     for (let y = 0; y < vaultSize; y++) {
-
         for (let x = 0; x < vaultSize; x++) {
-
             let cell = document.createElement('div');
-
             cell.className = 'grid-cell';
-
             cell.dataset.x = x;
-
             cell.dataset.y = y;
-
-            cell.innerHTML = `<span></span>`;
-
             grid.appendChild(cell);
 
+            // Add horizontal corridor
+            if (x < vaultSize - 1) {
+                let corridor = document.createElement('div');
+                corridor.className = 'horizontal-corridor';
+                corridor.dataset.startX = x;
+                corridor.dataset.startY = y;
+                corridor.dataset.endX = x + 1;
+                corridor.dataset.endY = y;
+                corridor.style.gridRow = y + 1;
+                corridor.style.gridColumn = (x * 2) + 2;
+                grid.appendChild(corridor);
+            }
+
+            // Add vertical corridor
+            if (y < vaultSize - 1) {
+                let corridor = document.createElement('div');
+                corridor.className = 'vertical-corridor';
+                corridor.dataset.startX = x;
+                corridor.dataset.startY = y;
+                corridor.dataset.endX = x;
+                corridor.dataset.endY = y + 1;
+                corridor.style.gridRow = (y * 2) + 2;
+                corridor.style.gridColumn = x + 1;
+                grid.appendChild(corridor);
+            }
         }
-
     }
-
     promptPortalFacing();
-
 }
 
+function markRoom(x, y) {
+function markRoom(x, y) {
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    cell.style.visibility = 'visible';
+    cell.classList.add('discovered');
+    if (roomData[`${x},${y}`].completed) {
+        cell.classList.add('completed');
+    } else {
+        cell.classList.remove('completed');
+    }
+}
 
+    // Show corridors if both rooms are discovered
+    showCorridors(x, y);
+}
+
+function showCorridors(x, y) {
+    // Check and show horizontal corridors
+    let horizontalCorridor = grid.querySelector(`.horizontal-corridor[data-start-x="${x}"][data-start-y="${y}"]`);
+    if (horizontalCorridor) {
+        let endX = parseInt(horizontalCorridor.dataset.endX);
+        let endY = parseInt(horizontalCorridor.dataset.endY);
+        if (roomData[`${endX},${endY}`]?.discovered) {
+            horizontalCorridor.style.visibility = 'visible';
+        }
+    }
+
+    // Check and show vertical corridors
+    let verticalCorridor = grid.querySelector(`.vertical-corridor[data-start-x="${x}"][data-start-y="${y}"]`);
+    if (verticalCorridor) {
+        let endX = parseInt(verticalCorridor.dataset.endX);
+        let endY = parseInt(verticalCorridor.dataset.endY);
+        if (roomData[`${endX},${endY}`]?.discovered) {
+            verticalCorridor.style.visibility = 'visible';
+        }
+    }
+}
 
 // Reset Map
 
