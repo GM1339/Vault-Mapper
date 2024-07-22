@@ -131,25 +131,25 @@ background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, vi
 }
 
 .portal-icon.north {
-    bottom: -20px; /* Adjust size as needed to position it outside */
+    bottom: -200px; /* Adjust size as needed to position it outside */
     left: 50%;
     transform: translateX(-50%);
 }
 
 .portal-icon.south {
-    top: -20px; /* Adjust size as needed to position it outside */
+    top: -200px; /* Adjust size as needed to position it outside */
     left: 50%;
     transform: translateX(-50%);
 }
 
 .portal-icon.east {
-    left: -20px; /* Adjust size as needed to position it outside */
+    left: -200px; /* Adjust size as needed to position it outside */
     top: 50%;
     transform: translateY(-50%);
 }
 
 .portal-icon.west {
-    right: -20px; /* Adjust size as needed to position it outside */
+    right: -200px; /* Adjust size as needed to position it outside */
     top: 50%;
     transform: translateY(-50%);
 }
