@@ -79,7 +79,26 @@ function toggleCompletion() {
 function markPortalRoom(x, y, direction) {
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     cell.classList.add('portal');
-    cell.classList.add(direction);
+
+    let oppositeDirection;
+    switch (direction) {
+        case 'north':
+            oppositeDirection = 'south';
+            break;
+        case 'south':
+            oppositeDirection = 'north';
+            break;
+        case 'east':
+            oppositeDirection = 'west';
+            break;
+        case 'west':
+            oppositeDirection = 'east';
+            break;
+    }
+
+    let line = document.createElement('div');
+    line.classList.add('portal-line', oppositeDirection);
+    cell.appendChild(line);
 }
 
 // Function to move in the grid
