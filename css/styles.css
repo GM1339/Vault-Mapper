@@ -131,25 +131,25 @@ background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, vi
 }
 
 .portal-icon.north {
-    bottom: 100%;
+    bottom: -20px; /* Adjust size as needed to position it outside */
     left: 50%;
     transform: translateX(-50%);
 }
 
 .portal-icon.south {
-    top: 100%;
+    top: -20px; /* Adjust size as needed to position it outside */
     left: 50%;
     transform: translateX(-50%);
 }
 
 .portal-icon.east {
-    left: 100%;
+    left: -20px; /* Adjust size as needed to position it outside */
     top: 50%;
     transform: translateY(-50%);
 }
 
 .portal-icon.west {
-    right: 100%;
+    right: -20px; /* Adjust size as needed to position it outside */
     top: 50%;
     transform: translateY(-50%);
 }
