@@ -80,31 +80,32 @@ function markPortalRoom(x, y, direction) {
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     cell.classList.add('portal');
 
-    let oppositeDirection;
+    let portalIcon = document.createElement('div');
+    portalIcon.classList.add('portal-icon', direction);
+    
     switch (direction) {
         case 'north':
-            oppositeDirection = 'south';
+            portalIcon.style.top = `${cell.offsetTop + cell.offsetHeight}px`;
+            portalIcon.style.left = `${cell.offsetLeft + cell.offsetWidth / 2 - 10}px`; // Adjust -10 for icon centering
             break;
         case 'south':
-            oppositeDirection = 'north';
+            portalIcon.style.top = `${cell.offsetTop - 20}px`; // Adjust -20 for icon height
+            portalIcon.style.left = `${cell.offsetLeft + cell.offsetWidth / 2 - 10}px`;
             break;
         case 'east':
-            oppositeDirection = 'west';
+            portalIcon.style.left = `${cell.offsetLeft - 20}px`; // Adjust -20 for icon width
+            portalIcon.style.top = `${cell.offsetTop + cell.offsetHeight / 2 - 10}px`;
             break;
         case 'west':
-            oppositeDirection = 'east';
+            portalIcon.style.left = `${cell.offsetLeft + cell.offsetWidth}px`;
+            portalIcon.style.top = `${cell.offsetTop + cell.offsetHeight / 2 - 10}px`;
             break;
     }
-
     // Add the black line
     let line = document.createElement('div');
     line.classList.add('portal-line', oppositeDirection);
     cell.appendChild(line);
-
-    // Add the portal icon
-    let portalIcon = document.createElement('div');
-    portalIcon.classList.add('portal-icon', direction);
-    cell.appendChild(portalIcon);
+    document.body.appendChild(portalIcon);
 }
 
 // Function to move in the grid
