@@ -133,14 +133,14 @@ background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, vi
 .portal-icon.north {
     width: 10px;
     height: 20px;
-    bottom: -50px;
+    bottom: 0;
     left: 0;
 }
 
 .portal-icon.south {
     width: 10px;
     height: 20px;
-    bottom: 0;
+    top: 0;
     left: 0;
 }
 
