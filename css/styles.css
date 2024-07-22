@@ -131,29 +131,29 @@ background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, vi
 }
 
 .portal-icon.north {
-    width: 100%;
-    height: 4px;
+    width: 10px;
+    height: 20px;
     top: 0;
     left: 0;
 }
 
 .portal-icon.south {
-    width: 100%;
-    height: 4px;
+    width: 10px;
+    height: 20px;
     bottom: 0;
     left: 0;
 }
 
 .portal-icon.east {
-    width: 4px;
-    height: 100%;
+    width: 20px;
+    height: 10px;
     top: 0;
     right: 0;
 }
 
 .portal-icon.west {
-    width: 4px;
-    height: 100%;
+    width: 20px;
+    height: 10px;
     top: 0;
     left: 0;
 }
