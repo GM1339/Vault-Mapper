@@ -119,45 +119,37 @@ body {
 }
 
 
-.portal-icon {
-background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
-    background-size: 400%;
-    animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*
+.portal-square {
+    width: 20px;
+    height: 20px;
+    background-color: red;
     position: absolute;
-    width: 10px; /* Adjust size as needed */
-    width: 10px;
-    height: 20px;
-    border: 3px solid black; /* GREG Black border for the smaller rectangle */
+    display: none; /* Initially hidden */
 }
 
-.portal-icon.north {
-    width: 10px;
-    height: 20px;
-    bottom: 0;
-    left: 0;
+.portal-square.north {
+    top: -20px; /* Adjust as needed to position the square */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.portal-icon.south {
-    width: 10px;
-    height: 20px;
-    top: 0;
-    left: 0;
+.portal-square.south {
+    bottom: -20px; /* Adjust as needed to position the square */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.portal-icon.east {
-    width: 20px;
-    height: 10px;
-    top: 0;
-    right: 0;
+.portal-square.west {
+    left: -20px; /* Adjust as needed to position the square */
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.portal-icon.west {
-    width: 20px;
-    height: 10px;
-    top: 0;
-    left: 0;
+.portal-square.east {
+    right: -20px; /* Adjust as needed to position the square */
+    top: 50%;
+    transform: translateY(-50%);
 }
-
 
 
 
