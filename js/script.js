@@ -172,4 +172,6 @@ document.addEventListener('keydown', (event) => {
     if (['a', 'arrowleft'].includes(key)) move('west');
     if (['s', 'arrowdown'].includes(key)) move('south');
     if (['d', 'arrowright'].includes(key)) move('east');
+
+    if ([' '].includes(key)) toggleCompletion();
 });
