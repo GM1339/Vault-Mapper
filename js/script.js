@@ -96,9 +96,15 @@ function markPortalRoom(x, y, direction) {
             break;
     }
 
+    // Add the black line
     let line = document.createElement('div');
     line.classList.add('portal-line', oppositeDirection);
     cell.appendChild(line);
+
+    // Add the portal icon
+    let portalIcon = document.createElement('div');
+    portalIcon.classList.add('portal-icon', direction);
+    cell.appendChild(portalIcon);
 }
 
 // Function to move in the grid
