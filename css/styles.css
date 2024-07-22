@@ -125,6 +125,7 @@ background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, vi
     animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*
     position: absolute;
     width: 10px; /* Adjust size as needed */
+    width: 10px;
     height: 20px;
     border: 3px solid black; /* GREG Black border for the smaller rectangle */
 }
