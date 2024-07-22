@@ -4,28 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vault Hunters Map</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="path/to/your/styles.css"> <!-- Adjust the path as necessary -->
 </head>
 <body>
-   <div id="controls">
-    <div class="control-button" id="north"><button onclick="move('north')">N</button></div>
-    <div class="control-button" id="west"><button onclick="move('west')">W</button></div>
-    <div class="control-button" id="east"><button onclick="move('east')">E</button></div>
-    <div class="control-button" id="south"><button onclick="move('south')">S</button></div>
-    <div class="control-center"></div>
-</div>
-    </div>
-    <div id="grid"></div>
-    <div id="completion-toggle-container">
-        <button id="completion-toggle" onclick="toggleCompletion()">Toggle Completion</button>
+    <div id="app">
+        <div id="grid" class="grid"></div>
+
+        <div class="controls">
+            <button id="north" class="direction-button">N</button>
+            <button id="south" class="direction-button">S</button>
+            <button id="east" class="direction-button">E</button>
+            <button id="west" class="direction-button">W</button>
+            <button id="toggle-completion" class="toggle-completion-button">Toggle Completion</button>
+        </div>
+
+        <div class="portal-room">
+            <div class="portal-square north"></div>
+            <div class="portal-square south"></div>
+            <div class="portal-square west"></div>
+            <div class="portal-square east"></div>
+        </div>
     </div>
 
-    <div class="portal-room">
-    <div class="portal-square north"></div>
-    <div class="portal-square south"></div>
-    <div class="portal-square west"></div>
-    <div class="portal-square east"></div>
-</div>
-    <script src="js/script.js"></script>
+    <script src="path/to/your/script.js"></script> <!-- Adjust the path as necessary -->
 </body>
 </html>
