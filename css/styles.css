@@ -177,4 +177,5 @@ body {
     right: -20px; /* Adjust as needed to position the square */
     top: 50%;
     transform: translateY(-50%);
+    transform: translateX(-50%);
 }
