@@ -78,7 +78,7 @@ body {
 .grid-cell.completed {
     border-color: green !important; /* Green border for completed rooms */
 }
-.portal-room {
+.portal {
     background-color: gray;
     border: 2px solid white; /* White border for the Portal Room */
     position: relative;
