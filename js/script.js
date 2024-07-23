@@ -79,32 +79,7 @@ function toggleCompletion() {
 function markPortalRoom(x, y, direction) {
     let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     cell.classList.add('portal');
-
-       let oppositeDirection;
-    switch (direction) {
-        case 'north':
-            oppositeDirection = 'south';
-            break;
-        case 'south':
-            oppositeDirection = 'north';
-            break;
-        case 'east':
-            oppositeDirection = 'west';
-            break;
-        case 'west':
-            oppositeDirection = 'east';
-            break;
-    }
-
-    // Add the black line
-    let line = document.createElement('div');
-    line.classList.add('portal-line', oppositeDirection);
-    cell.appendChild(line);
-
-    // Add the portal icon
-    let portalIcon = document.createElement('div');
-    portalIcon.classList.add('portal-icon', direction);
-    cell.appendChild(portalIcon);
+    cell.classList.add(direction);
 }
 
 // Function to move in the grid
@@ -153,53 +128,6 @@ function markPlayerPosition(x, y) {
     cell.innerHTML = '<div class="player" style="border: 3px solid black;"></div>';
 }
 
-
-
-
-
-// script.js
-
-function updatePortalSquares(portalFacing) {
-    const portalRoom = document.querySelector('.portal-room');
-    const northSquare = portalRoom.querySelector('.portal-square.north');
-    const southSquare = portalRoom.querySelector('.portal-square.south');
-    const westSquare = portalRoom.querySelector('.portal-square.west');
-    const eastSquare = portalRoom.querySelector('.portal-square.east');
-
-    // Hide all squares initially
-    northSquare.style.display = 'none';
-    southSquare.style.display = 'none';
-    westSquare.style.display = 'none';
-    eastSquare.style.display = 'none';
-
-    // Show the square opposite the portal direction
-    switch (portalDirection) {
-        case 'north':
-            southSquare.style.display = 'block';
-            break;
-        case 'south':
-            northSquare.style.display = 'block';
-            break;
-        case 'west':
-            eastSquare.style.display = 'block';
-            break;
-        case 'east':
-            westSquare.style.display = 'block';
-            break;
-        default:
-            break;
-    }
-}
-
-// Example usage: call this function when the portal direction is determined
-const portalFacing = 'north'; // Replace this with the actual direction
-updatePortalSquares(portalFacing);
-
-
-
-
-
-
 // Undo move
 function undo() {
     // Implement your undo logic here
@@ -219,6 +147,6 @@ document.addEventListener('keydown', (event) => {
     if (['a', 'arrowleft'].includes(key)) move('west');
     if (['s', 'arrowdown'].includes(key)) move('south');
     if (['d', 'arrowright'].includes(key)) move('east');
-
+    
     if ([' '].includes(key)) toggleCompletion();
 });
