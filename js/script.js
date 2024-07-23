@@ -7,6 +7,7 @@ let vaultSize = 21; // Change grid size to 21x21
 let portalFacing = null;
 let completedRooms = {};
 
+
 // Initialize Grid
 function initializeGrid() {
     grid.innerHTML = '';
