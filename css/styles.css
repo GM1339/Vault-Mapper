@@ -1,3 +1,5 @@
+/* Basic page styling settings */
+
 body {
     background-color: #1C1C1C;
     color: #fff;
@@ -9,7 +11,15 @@ body {
     height: 100vh;
     margin: 0;
 }
-#controls {
+
+
+
+
+/* North, South, East, West Buttons and their logic */
+
+#controls /* An invisible square which is used as a point of reference for the positioning of the NSWE buttons.
+            Will later be replaced by an overhead image of a Vault Compass*/
+{
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -17,53 +27,71 @@ body {
     height: 140px; /* Total height to accommodate the north and south buttons */
 }
 
-#north, #south {
+#north, #south 
+{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
-#north {
+#north 
+{
     top: 0;
 }
 
-#south {
+#south 
+{
     bottom: 0;
 }
 
-#west, #east {
+#west, #east 
+{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
 
-#west {
+#west 
+{
     left: 0;
 }
 
-#east {
+#east 
+{
     right: 0;
 }
 
-#controls button {
+#controls button /* General format settings for the NSWE buttons */
+{
     width: 40px;
     height: 40px;
     font-size: 16px;
     border: none;
     background-color: #444;
     color: #fff;
-    cursor: pointer;
+    cursor: pointer; /* Not sure what this does */
+    
 }
-#grid {
+/* In the future, I want to add logic to cause these buttons to glow when clicked */
+
+
+
+/*  The grid refers to an invisible grid of cells, each one representing a room in the Vault */
+
+#grid /* Code to spawn in the grid, including its dimensions and spacing */
+{
     display: grid;
-    grid-template-columns: repeat(21, 35px); /* 25% reduction from 50px */
-    grid-template-rows: repeat(21, 35px);    /* 25% reduction from 50px */
+    grid-template-columns: repeat(21, 35px);
+    grid-template-rows: repeat(21, 35px);
     gap: 30px;
-    margin-bottom: 60px; /* Adjust margin to accommodate controls */
+    margin-bottom: 60px; /* Can be adjusted to accommodate for controls */
 }
-.grid-cell {
-    width: 35px; /* 25% reduction from 50px */
-    height: 35px; /* 25% reduction from 50px */
+
+
+.grid-cell /* The formatting code for each room in the grid */
+{
+    width: 35px;
+    height: 35px;
     background-color: transparent;
     border: none; /* No initial border */
     display: flex;
@@ -71,50 +99,53 @@ body {
     justify-content: center;
     position: relative;
 }
-.grid-cell.discovered {
-   /* background-color: #f0f0f0; /* Pale gray background for discovered rooms */
-    border: 3px solid red; /* Red border for discovered rooms */
-}
-.grid-cell.completed {
-    border-color: green !important; /* Green border for completed rooms */
-}
-.portal {
-    background-color: gray;
-    border: 2px solid white; /* White border for the Portal Room */
-    position: relative;
-}
-.portal::after {
-    content: '';
-    width: 10px; /* Adjusted size for smaller rooms */
-    height: 20px; /* Adjusted size for smaller rooms */
-    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
-    background-size: 400%;
-    animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*/
-    position: absolute;
-    bottom: 4px; /*GREG Adjusted position for smaller rooms */
-    left: 50%;
-    transform: translateX(-50%);
-    border: 3px solid black; /* GREG Black border for the smaller rectangle */
-}
-/* edited by GREG with gpt snippet */
-@keyframes cycle-colors {
-    0% { background-color: red; }
-    14% { background-color: orange; }
-    28% { background-color: yellow; }
-    42% { background-color: green; }
-    57% { background-color: blue; }
-    71% { background-color: indigo; }
-    85% { background-color: violet; }
-    100% { background-color: red; }
-}
-.player {
-    width: 15px; /* Adjusted size for smaller rooms */
-    height: 15px; /* Adjusted size for smaller rooms */
-    background-color: white;
-    border-radius: 50%; /* Circle shape */
-    border: 3px solid black; /* 3px black border for the player */
+
+.grid-cell.discovered /* The format to apply to rooms that have been "discovered" (entered by the player at least once) */
+{
+    border: 3px solid red;
 }
 
+.grid-cell.completed 
+{
+    border-color: green !important; /* Once a room is "completed", the red border is replaced by a green border by a toggle */
+}
+/* In the future, I want to add the feature that the room the player is currently in glows either red or green based on "complete" status */
+
+
+.portal /* The style for the unique Portal Room. This was a mistake on my part; the Vault Portal appears where a corridor should be,
+        adjacent to the middle room of the grid rather than its own room on the grid. This room will be removed in the future */
+{
+    background-color: gray;
+    border: 2px solid white;
+    position: relative;
+}
+
+.portal::after /* The code to format the Portal icon placed in the Portal Room. This will eventaully be replaced by a simple gif and placed adjacent
+                to the Starting Room in the center of the grid. The red squares seen later in this code are beta versions of that future portal icon */
+{
+    content: '';
+    width: 10px; 
+    height: 20px; 
+    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400%;
+    position: absolute;
+    bottom: 4px; 
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid black; 
+}
+
+/* Icon to represent the current location of the Player on the map. Will eventually be replaced with Steve's face.
+In the future, I hope to make the Player Icon customizeable so that it can match the user's Minecraft Skin */
+.player {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%; /* Circle shape */
+    border: 3px solid black;
+}
+
+/* Formatting code for the floating button used to toggle whether a room is "complete" or not */
 #completion-toggle-container {
     position: fixed;
     bottom: 10px;
@@ -124,7 +155,6 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
-
 #completion-toggle {
     background-color: #444;
     color: white;
@@ -134,47 +164,54 @@ body {
     cursor: pointer;
     border-radius: 5px;
 }
-
 #completion-toggle:hover {
-    background-color: #555;
+    background-color: #291C06;
 }
 
 
-
-/* styles.css */
-
+/* Not entirely sure what this bit is for  */
 .portal-room {
     position: relative;
 }
 
+/* This is the placeholder formatting for the Portal Icon. The goal is to have the player enter the direction the portal faces in-game,
+then place a gif of the Portal adjacent to the Starting Room, opposite to the direction the player inputted*/
 .portal-square {
     width: 20px;
     height: 20px;
-    background-color: red;
+    background-color: red; /* Arbitrary and for testing */
     position: absolute;
     display: none; /* Initially hidden */
 }
 
-.portal-square.north {
-    top: -20px; /* Adjust as needed to position the square */
+/* These determine the positions of 4 Portal Icons, each one in one of the four possible locations. The one
+opposite the direction the Portal faces will be made visible. This positioning code is *very* nonfunctional. It causes
+all four versions to appear at the very top of the site, above the grid in a place you can't see without zooming out.
+I want the spacing to, instead, have the icons be touching the Starting room, one one each side of the square */
+.portal-square.north 
+{
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.portal-square.south {
-    bottom: -20px; /* Adjust as needed to position the square */
+.portal-square.south 
+{
+    bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.portal-square.west {
-    left: -20px; /* Adjust as needed to position the square */
+.portal-square.west 
+{
+    left: -20px;
     top: 50%;
     transform: translateY(-50%);
 }
 
-.portal-square.east {
-    right: -20px; /* Adjust as needed to position the square */
+.portal-square.east 
+{
+    right: -20px;/
     top: 50%;
     transform: translateY(-50%);
     transform: translateX(-50%);
