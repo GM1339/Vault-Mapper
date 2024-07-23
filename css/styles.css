@@ -83,76 +83,19 @@ body {
     border: 2px solid white; /* White border for the Portal Room */
     position: relative;
 }
-
-
-.portal-line {
+.portal::after {
+    content: '';
+    width: 10px; /* Adjusted size for smaller rooms */
+    height: 20px; /* Adjusted size for smaller rooms */
+    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet); /*GREG changed from linear to radial*/
+    background-size: 400%;
+    animation: cycle-colors 5s linear infinite; /*GREG changed back to linear*/
     position: absolute;
-    background-color: black;
-}
-
-.portal-line.north {
-    width: 100%;
-    height: 4px;
-    top: 0;
-    left: 0;
-}
-
-.portal-line.south {
-    width: 100%;
-    height: 4px;
-    bottom: 0;
-    left: 0;
-}
-
-.portal-line.east {
-    width: 4px;
-    height: 100%;
-    top: 0;
-    right: 0;
-}
-
-.portal-line.west {
-    width: 4px;
-    height: 100%;
-    top: 0;
-    left: 0;
-}
-
-
-.portal-square {
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    position: absolute;
-    display: none; /* Initially hidden */
-}
-
-.portal-square.north {
-    top: -20px; /* Adjust as needed to position the square */
+    bottom: 4px; /*GREG Adjusted position for smaller rooms */
     left: 50%;
     transform: translateX(-50%);
+    border: 3px solid black; /* GREG Black border for the smaller rectangle */
 }
-
-.portal-square.south {
-    bottom: -20px; /* Adjust as needed to position the square */
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.portal-square.west {
-    left: -20px; /* Adjust as needed to position the square */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.portal-square.east {
-    right: -20px; /* Adjust as needed to position the square */
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-
-
 /* edited by GREG with gpt snippet */
 @keyframes cycle-colors {
     0% { background-color: red; }
