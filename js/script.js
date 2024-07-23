@@ -40,6 +40,7 @@ function promptPortalFacing() {
     }
     portalFacing = direction;
     setStartingRoom(direction);
+    updatePortalSquares(portalDirection);
 }
 
 // Set starting room based on portal facing direction
