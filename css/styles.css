@@ -138,3 +138,43 @@ body {
 #completion-toggle:hover {
     background-color: #555;
 }
+
+
+
+/* styles.css */
+
+.portal-room {
+    position: relative;
+}
+
+.portal-square {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    position: absolute;
+    display: none; /* Initially hidden */
+}
+
+.portal-square.north {
+    top: -20px; /* Adjust as needed to position the square */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.portal-square.south {
+    bottom: -20px; /* Adjust as needed to position the square */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.portal-square.west {
+    left: -20px; /* Adjust as needed to position the square */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.portal-square.east {
+    right: -20px; /* Adjust as needed to position the square */
+    top: 50%;
+    transform: translateY(-50%);
+}
