@@ -134,7 +134,7 @@ function markPlayerPosition(x, y) {
 
 
 
-function updatePortalSquares(portalFacing) {
+function updatePortalSquares(direction) {
     const portalRoom = document.querySelector('.portal-room');
     const northSquare = portalRoom.querySelector('.portal-square.north');
     const southSquare = portalRoom.querySelector('.portal-square.south');
@@ -148,7 +148,7 @@ function updatePortalSquares(portalFacing) {
     eastSquare.style.display = 'none';
 
     // Show the square opposite the portal direction
-    switch (portalFacing) {
+    switch (direction) {
         case 'north':
             southSquare.style.display = 'block';
             break;
