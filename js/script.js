@@ -130,29 +130,6 @@ function markPlayerPosition(x, y) {
     cell.innerHTML = '<div class="player" style="border: 3px solid black;"></div>';
 }
 
-// Undo move
-function undo() {
-    // Implement your undo logic here
-}
-
-// Redo move
-function redo() {
-    // Implement your redo logic here
-}
-
-// Initialize the map on load
-resetMap();
-
-document.addEventListener('keydown', (event) => {
-    const key = event.key.toLowerCase();
-    if (['w', 'arrowup'].includes(key)) move('north');
-    if (['a', 'arrowleft'].includes(key)) move('west');
-    if (['s', 'arrowdown'].includes(key)) move('south');
-    if (['d', 'arrowright'].includes(key)) move('east');
-    
-    if ([' '].includes(key)) toggleCompletion();
-});
-
 
 
 function updatePortalSquares(portalDirection) {
@@ -190,3 +167,33 @@ function updatePortalSquares(portalDirection) {
 // Example usage: call this function when the portal direction is determined
 const portalDirection = 'direction'; // Replace this with the actual direction
 updatePortalSquares(portalDirection);
+
+
+
+
+
+
+
+
+// Undo move
+function undo() {
+    // Implement your undo logic here
+}
+
+// Redo move
+function redo() {
+    // Implement your redo logic here
+}
+
+// Initialize the map on load
+resetMap();
+
+document.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
+    if (['w', 'arrowup'].includes(key)) move('north');
+    if (['a', 'arrowleft'].includes(key)) move('west');
+    if (['s', 'arrowdown'].includes(key)) move('south');
+    if (['d', 'arrowright'].includes(key)) move('east');
+    
+    if ([' '].includes(key)) toggleCompletion();
+});
