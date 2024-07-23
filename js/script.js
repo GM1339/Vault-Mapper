@@ -40,6 +40,8 @@ function promptPortalFacing() {
     }
     portalFacing = direction;
     setStartingRoom(direction);
+    
+    
     updatePortalSquares(portalDirection);
 }
 
@@ -132,7 +134,7 @@ function markPlayerPosition(x, y) {
 
 
 
-function updatePortalSquares(portalDirection) {
+function updatePortalSquares(portalFacing) {
     const portalRoom = document.querySelector('.portal-room');
     const northSquare = portalRoom.querySelector('.portal-square.north');
     const southSquare = portalRoom.querySelector('.portal-square.south');
@@ -146,7 +148,7 @@ function updatePortalSquares(portalDirection) {
     eastSquare.style.display = 'none';
 
     // Show the square opposite the portal direction
-    switch (portalDirection) {
+    switch (portalFacing) {
         case 'north':
             southSquare.style.display = 'block';
             break;
@@ -164,9 +166,7 @@ function updatePortalSquares(portalDirection) {
     }
 }
 
-// Example usage: call this function when the portal direction is determined
-const portalDirection = 'direction'; // Replace this with the actual direction
-updatePortalSquares(portalDirection);
+
 
 
 
