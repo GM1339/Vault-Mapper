@@ -24,7 +24,6 @@ function initializeGrid() {
             grid.appendChild(cell);
         }
     }
-    //promptPortalFacing(); //Calls the function that asks the user which way the Portal faces in-game
 }
 
 // Reset Map
@@ -37,21 +36,6 @@ function resetMap()
     initializeGrid();
 }
 
-// Prompt user to set portal facing direction
-// function promptPortalFacing() 
-// {
-//     let direction = prompt("Enter portal facing direction (north, south, east, west):").toLowerCase();
-//     while (!['north', 'south', 'east', 'west'].includes(direction)) {
-//         direction = prompt("Invalid direction. Enter portal facing direction (north, south, east, west):").toLowerCase();
-//     }
-//     portalFacing = direction; //Not sure if portalFacing is a useful variable or if it can be optimized out
-//     setStartingRoom(direction); //Set which room is the Starting Room based on the direction the portal faces
-    
-//     updatePortalSquares(direction); /* Is meant to make the portal icon (currently a red square) that is opposite to the direction 
-//                                         that the portal is facing appear. It does not work and I'm not sure why */
-// }
-
-// Set starting room based on portal facing direction
 function setStartingRoom(direction) 
 {
     let startingRoom;
