@@ -187,7 +187,7 @@ then place a gif of the Portal adjacent to the Starting Room, opposite to the di
 /* These determine the positions of 4 Portal Icons, each one in one of the four possible locations. The one
 opposite the direction the Portal faces will be made visible. This positioning code is *very* nonfunctional. It causes
 all four versions to appear at the very top of the site, above the grid in a place you can't see without zooming out.
-I want the spacing to, instead, have the icons be touching the Starting room, one one each side of the square */
+I want the spacing to, instead, have the icons be touching the Starting room, one one each side of the square  */
 .portal-square.north 
 {
     top: 0px;
