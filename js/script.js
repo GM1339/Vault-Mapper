@@ -24,7 +24,7 @@ function initializeGrid() {
             grid.appendChild(cell);
         }
     }
-    promptPortalFacing(); //Calls the function that asks the user which way the Portal faces in-game
+    //promptPortalFacing(); //Calls the function that asks the user which way the Portal faces in-game
 }
 
 // Reset Map
@@ -33,22 +33,23 @@ function resetMap()
     currentRoom = { x: Math.floor(vaultSize / 2), y: Math.floor(vaultSize / 2) };
     roomData = {};
     completedRooms = {};
+    
     initializeGrid();
 }
 
 // Prompt user to set portal facing direction
-function promptPortalFacing() 
-{
-    let direction = prompt("Enter portal facing direction (north, south, east, west):").toLowerCase();
-    while (!['north', 'south', 'east', 'west'].includes(direction)) {
-        direction = prompt("Invalid direction. Enter portal facing direction (north, south, east, west):").toLowerCase();
-    }
-    portalFacing = direction; //Not sure if portalFacing is a useful variable or if it can be optimized out
-    setStartingRoom(direction); //Set which room is the Starting Room based on the direction the portal faces
+// function promptPortalFacing() 
+// {
+//     let direction = prompt("Enter portal facing direction (north, south, east, west):").toLowerCase();
+//     while (!['north', 'south', 'east', 'west'].includes(direction)) {
+//         direction = prompt("Invalid direction. Enter portal facing direction (north, south, east, west):").toLowerCase();
+//     }
+//     portalFacing = direction; //Not sure if portalFacing is a useful variable or if it can be optimized out
+//     setStartingRoom(direction); //Set which room is the Starting Room based on the direction the portal faces
     
-    updatePortalSquares(direction); /* Is meant to make the portal icon (currently a red square) that is opposite to the direction 
-                                        that the portal is facing appear. It does not work and I'm not sure why */
-}
+//     updatePortalSquares(direction); /* Is meant to make the portal icon (currently a red square) that is opposite to the direction 
+//                                         that the portal is facing appear. It does not work and I'm not sure why */
+// }
 
 // Set starting room based on portal facing direction
 function setStartingRoom(direction) 
@@ -118,6 +119,18 @@ function move(direction)
 
     if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
         roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
+    }
+
+    if (!roomData[`${previousRoom.x},${previousRoom.y}`]?.portalFacing && previousRoom.x=== Math.floor(vaultSize/2) && previousRoom.y === Math.floor(vaultSize/2) ) {
+        roomData[`${previousRoom.x},${previousRoom.y}`].portalFacing=direction
+        portalFacing=direction
+        setStartingRoom(direction); //Set which room is the Starting Room based on the direction the portal faces
+    
+        updatePortalSquares(direction); /* Is meant to make the portal icon (currently a red square) that is opposite to the direction 
+                                        that the portal is facing appear. It does not work and I'm not sure why */
+
+        
+
     }
 
     markRoom(playerPosition.x, playerPosition.y);
