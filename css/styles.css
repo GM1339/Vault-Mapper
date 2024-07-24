@@ -192,26 +192,26 @@ I want the spacing to, instead, have the icons be touching the Starting room, on
 {
     top: 0px;
     left: 0px;
-    transform: translate(0px, 0px);
+    transform: translate(-8px, 630px);
 }
 
 .portal-square.south 
 {
     bottom: 0px;
     left: 0px;
-    transform: translate(0px, 0px);
+    transform: translate(-8px, 690px);
 }
 
 .portal-square.west 
 {
     left: 0px;
     top: 0px;
-    transform: translate(0px, 0px);
+    transform: translate(-37px, 660px);
 }
 
 .portal-square.east 
 {
     right: 0px;
     top: 0px;
-    transform: translate(-50px, 0px);
+    transform: translate(40px, 660px);
 }
