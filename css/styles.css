@@ -190,28 +190,28 @@ all four versions to appear at the very top of the site, above the grid in a pla
 I want the spacing to, instead, have the icons be touching the Starting room, one one each side of the square */
 .portal-square.north 
 {
-    top: -20px;
-    left: 50%;
-    transform: translate(-50px, 0px);
+    top: 0px;
+    left: 0px;
+    transform: translate(0px, 0px);
 }
 
 .portal-square.south 
 {
-    bottom: -20px;
-    left: 50%;
-    transform: translate(-50px, 0px);
+    bottom: 0px;
+    left: 0px;
+    transform: translate(0px, 0px);
 }
 
 .portal-square.west 
 {
-    left: -20px;
-    top: 50%;
-    transform: translate(0px, -50px);
+    left: 0px;
+    top: 0px;
+    transform: translate(0px, 0px);
 }
 
 .portal-square.east 
 {
-    right: -20px;/
-    top: 50%;
-    transform: translate(-50px, -50px);
+    right: 0px;
+    top: 0px;
+    transform: translate(-50px, 0px);
 }
