@@ -121,8 +121,7 @@ function move(direction)
         roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
     }
 
-    if (!roomData[`${previousRoom.x},${previousRoom.y}`]?.portalFacing && previousRoom.x=== Math.floor(vaultSize/2) && previousRoom.y === Math.floor(vaultSize/2) ) {
-        roomData[`${previousRoom.x},${previousRoom.y}`].portalFacing=direction
+    if (portalFacing === null && previousRoom.x=== Math.floor(vaultSize/2) && previousRoom.y === Math.floor(vaultSize/2) ) {
         portalFacing=direction
         setStartingRoom(direction); //Set which room is the Starting Room based on the direction the portal faces
     
