@@ -174,13 +174,28 @@ In the future, I hope to make the Player Icon customizeable so that it can match
     position: relative;
 }
 
+
+@keyframes rainbowCycle {
+    0% { background-color: red; }
+    14.28% { background-color: orange; }
+    28.56% { background-color: yellow; }
+    42.84% { background-color: green; }
+    57.12% { background-color: blue; }
+    71.40% { background-color: indigo; }
+    85.68% { background-color: violet; }
+    100% { background-color: red; }
+}
+
+
+
 /* This is the placeholder formatting for the Portal Icon. The goal is to have the player enter the direction the portal faces in-game,
 then place a gif of the Portal adjacent to the Starting Room, opposite to the direction the player inputted*/
 .portal-square {
     width: 20px;
     height: 20px;
-    background-color: red; /* Arbitrary and for testing */
+    animation: rainbowCycle 5s infinite; /* Adjust duration as needed */
     position: absolute;
+    border: 5px solid black;
     display: none; /* Initially hidden */
 }
 
