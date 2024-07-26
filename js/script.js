@@ -87,18 +87,28 @@ function move(direction)
 
     switch (direction) 
     {
-        case 'north':
-            if (playerPosition.y > 0) playerPosition.y--;
-            break;
-        case 'south':
-            if (playerPosition.y < vaultSize - 1) playerPosition.y++;
-            break;
-        case 'east':
-            if (playerPosition.x < vaultSize - 1) playerPosition.x++;
-            break;
-        case 'west':
-            if (playerPosition.x > 0) playerPosition.x--;
-            break;
+// Assuming `portalFacing` is already defined and set to one of 'north', 'south', 'east', or 'west'.
+
+switch (direction) 
+{
+    case 'north':
+        // Prevent entering from the south side if the portal faces north
+        if (playerPosition.y > 0 && !(playerPosition.y - 1 === currentRoom.y && playerPosition.x === currentRoom.x && portalFacing === 'south')) playerPosition.y--;
+        break;
+    case 'south':
+        // Prevent entering from the north side if the portal faces south
+        if (playerPosition.y < vaultSize - 1 && !(playerPosition.y + 1 === currentRoom.y && playerPosition.x === currentRoom.x && portalFacing === 'north')) playerPosition.y++;
+        break;
+    case 'east':
+        // Prevent entering from the west side if the portal faces east
+        if (playerPosition.x < vaultSize - 1 && !(playerPosition.x + 1 === currentRoom.x && playerPosition.y === currentRoom.y && portalFacing === 'west')) playerPosition.x++;
+        break;
+    case 'west':
+        // Prevent entering from the east side if the portal faces west
+        if (playerPosition.x > 0 && !(playerPosition.x - 1 === currentRoom.x && playerPosition.y === currentRoom.y && portalFacing === 'east')) playerPosition.x--;
+        break;
+}
+
     }
     if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
         roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
