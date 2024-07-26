@@ -120,20 +120,6 @@ body {
     position: relative;
 }
 
-.portal::after /* The code to format the Portal icon placed in the Portal Room. This will eventaully be replaced by a simple gif and placed adjacent
-                to the Starting Room in the center of the grid. The red squares seen later in this code are beta versions of that future portal icon */
-{
-    content: '';
-    width: 10px; 
-    height: 20px; 
-    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet);
-    background-size: 400%;
-    position: absolute;
-    bottom: 4px; 
-    left: 50%;
-    transform: translateX(-50%);
-    border: 3px solid black; 
-}
 
 /* Icon to represent the current location of the Player on the map. Will eventually be replaced with Steve's face.
 In the future, I hope to make the Player Icon customizeable so that it can match the user's Minecraft Skin */
