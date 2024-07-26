@@ -36,11 +36,24 @@ function resetMap()
     initializeGrid();
 }
 
-function setStartingRoom() 
+function setStartingRoom(direction) 
 {
-
-    startingRoom = { x: currentRoom.x, y: currentRoom.y };
-    
+    let startingRoom;
+    switch (direction) 
+    {
+        case 'north':
+            startingRoom = { x: currentRoom.x, y: currentRoom.y - 1 };
+            break;
+        case 'south':
+            startingRoom = { x: currentRoom.x, y: currentRoom.y + 1 };
+            break;
+        case 'east':
+            startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
+            break;
+        case 'west':
+            startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
+            break;
+    }
     playerPosition = { ...startingRoom }; // Set player position to the starting room
     roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false }; //Set the status of Starting Room
     markRoom(startingRoom.x, startingRoom.y);
@@ -94,7 +107,7 @@ function move(direction)
 
     if (portalFacing === null && previousRoom.x=== Math.floor(vaultSize/2) && previousRoom.y === Math.floor(vaultSize/2) ) {
         portalFacing=direction
-        setStartingRoom(); //Set which room is the Starting Room based on the direction the portal faces
+        setStartingRoom(direction); //Set which room is the Starting Room based on the direction the portal faces
     
         updatePortalSquares(direction); /* Is meant to make the portal icon (currently a red square) that is opposite to the direction 
                                         that the portal is facing appear. It does not work and I'm not sure why */
