@@ -81,6 +81,11 @@ body {
 #grid /* Code to spawn in the grid, including its dimensions and spacing */
 {
     display: grid;
+    
+    background-image: url('images/Map_Bg.png');
+    background-size: cover; /* Ensures the image covers the entire grid */
+    background-position: center; /* Centers the background image */
+    
     grid-template-columns: repeat(21, 35px);
     grid-template-rows: repeat(21, 35px);
     gap: 30px;
