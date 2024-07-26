@@ -87,29 +87,20 @@ function move(direction)
 
     switch (direction) 
     {
-// Assuming `portalFacing` is already defined and set to one of 'north', 'south', 'east', or 'west'.
-
-switch (direction) 
-{
-switch (direction) 
-{
-    case 'north':
-        if (playerPosition.y > 0) playerPosition.y--;
-        break;
-    case 'south':
-        if (playerPosition.y < vaultSize - 1) playerPosition.y++;
-        break;
-    case 'east':
-        if (playerPosition.x < vaultSize - 1) playerPosition.x++;
-        break;
-    case 'west':
-        if (playerPosition.x > 0) playerPosition.x--;
-        break;
-}
-
-}
-
+        case 'north':
+            if (playerPosition.y > 0 && !(playerPosition.x === currentRoom.x && playerPosition.y - 1 === currentRoom.y)) playerPosition.y--;
+            break;
+        case 'south':
+            if (playerPosition.y < vaultSize - 1 && !(playerPosition.x === currentRoom.x && playerPosition.y + 1 === currentRoom.y)) playerPosition.y++;
+            break;
+        case 'east':
+            if (playerPosition.x < vaultSize - 1 && !(playerPosition.x + 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x++;
+            break;
+        case 'west':
+            if (playerPosition.x > 0 && !(playerPosition.x - 1 === currentRoom.x && playerPosition.y === currentRoom.y)) playerPosition.x--;
+            break;
     }
+
     if (!roomData[`${playerPosition.x},${playerPosition.y}`]?.discovered) {
         roomData[`${playerPosition.x},${playerPosition.y}`] = { type: 'normal', discovered: true, completed: false };
     }
