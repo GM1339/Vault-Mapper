@@ -1,7 +1,7 @@
 let grid = document.getElementById('grid');
 
-let currentRoom = { x: 10, y: 10 }; // Starting at the center for a 21x21 grid
-let playerPosition = { x: 10, y: 10 }; // Chooses where the Player icon starts at
+let currentRoom = { x: Math.floor(vaultSize / 2), y: Math.floor(vaultSize / 2) }; // Starting at the center for a 21x21 grid
+let playerPosition = { x: Math.floor(vaultSize / 2), y: Math.floor(vaultSize / 2) }; // Set player position to the center
 let roomData = {};
 let vaultSize = 21; // Change grid size to 21x21
 let portalFacing = null;
@@ -12,55 +12,53 @@ let completedRooms = {};
 // Initialize Grid
 function initializeGrid() {
     grid.innerHTML = '';
-    for (let y = 0; y < vaultSize; y++) 
-    {
-        for (let x = 0; x < vaultSize; x++) 
-        {
+    for (let y = 0; y < vaultSize; y++) {
+        for (let x = 0; x < vaultSize; x++) {
             let cell = document.createElement('div');
             cell.className = 'grid-cell';
             cell.dataset.x = x;
             cell.dataset.y = y;
-            cell.innerHTML = '<span></span>';
             grid.appendChild(cell);
         }
     }
+    // Mark the central cell as the starting room
+    markStartingRoom(currentRoom.x, currentRoom.y);
+    markPlayerPosition(currentRoom.x, currentRoom.y); // Place the player in the starting room
 }
 
+
 // Reset Map
-function resetMap() 
-{
+function resetMap() {
     currentRoom = { x: Math.floor(vaultSize / 2), y: Math.floor(vaultSize / 2) };
+    playerPosition = { ...currentRoom }; // Set player position to the starting room
     roomData = {};
     completedRooms = {};
-    
     initializeGrid();
 }
 
-function setStartingRoom(direction) 
-{
-    let startingRoom;
-    switch (direction) 
-    {
-        case 'north':
-            startingRoom = { x: currentRoom.x, y: currentRoom.y - 1 };
-            break;
-        case 'south':
-            startingRoom = { x: currentRoom.x, y: currentRoom.y + 1 };
-            break;
-        case 'east':
-            startingRoom = { x: currentRoom.x + 1, y: currentRoom.y };
-            break;
-        case 'west':
-            startingRoom = { x: currentRoom.x - 1, y: currentRoom.y };
-            break;
-    }
-    playerPosition = { ...startingRoom }; // Set player position to the starting room
-    roomData[`${startingRoom.x},${startingRoom.y}`] = { type: 'normal', discovered: true, completed: false }; //Set the status of Starting Room
-    markRoom(startingRoom.x, startingRoom.y);
-    markPlayerPosition(startingRoom.x, startingRoom.y);
-    
-    markPortalRoom(currentRoom.x, currentRoom.y, direction);
+
+
+function markStartingRoom(x, y) {
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    cell.classList.add('starting-room');
 }
+
+function markPlayerPosition(x, y) {
+    document.querySelectorAll('.player').forEach(player => player.remove()); // Remove previous player icons
+    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    cell.innerHTML = '<div class="player"></div>';
+}
+
+
+
+
+function setStartingRoom() {
+    playerPosition = { ...currentRoom }; // Set player position to the starting room
+    roomData[`${currentRoom.x},${currentRoom.y}`] = { type: 'starting', discovered: true, completed: false }; // Mark the starting room as discovered
+    markRoom(currentRoom.x, currentRoom.y);
+    markPlayerPosition(currentRoom.x, currentRoom.y);
+}
+
 
 
 // Function to toggle room completion status
@@ -72,13 +70,6 @@ function toggleCompletion() {
     }
 }
 
-
-// Function to mark portal room
-function markPortalRoom(x, y, direction) { //Not sure what these lines do, actually
-    let cell = grid.querySelector(`[data-x="${x}"][data-y="${y}"]`); 
-    cell.classList.add('portal');
-    cell.classList.add(direction);
-}
 
 // Function to move in the grid
 function move(direction) 
@@ -107,8 +98,6 @@ function move(direction)
 
     if (portalFacing === null && previousRoom.x=== Math.floor(vaultSize/2) && previousRoom.y === Math.floor(vaultSize/2) ) {
         portalFacing=direction
-        setStartingRoom(direction); //Set which room is the Starting Room based on the direction the portal faces
-    
         updatePortalSquares(direction); /* Is meant to make the portal icon (currently a red square) that is opposite to the direction 
                                         that the portal is facing appear. It does not work and I'm not sure why */
 
