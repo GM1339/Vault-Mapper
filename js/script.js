@@ -91,22 +91,22 @@ function move(direction)
 
 switch (direction) 
 {
+switch (direction) 
+{
     case 'north':
-        // Prevent entering from the south side if the portal faces north
-        if (playerPosition.y > 0 && !(playerPosition.y - 1 === currentRoom.y && playerPosition.x === currentRoom.x && portalFacing === 'south')) playerPosition.y--;
+        if (playerPosition.y > 0) playerPosition.y--;
         break;
     case 'south':
-        // Prevent entering from the north side if the portal faces south
-        if (playerPosition.y < vaultSize - 1 && !(playerPosition.y + 1 === currentRoom.y && playerPosition.x === currentRoom.x && portalFacing === 'north')) playerPosition.y++;
+        if (playerPosition.y < vaultSize - 1) playerPosition.y++;
         break;
     case 'east':
-        // Prevent entering from the west side if the portal faces east
-        if (playerPosition.x < vaultSize - 1 && !(playerPosition.x + 1 === currentRoom.x && playerPosition.y === currentRoom.y && portalFacing === 'west')) playerPosition.x++;
+        if (playerPosition.x < vaultSize - 1) playerPosition.x++;
         break;
     case 'west':
-        // Prevent entering from the east side if the portal faces west
-        if (playerPosition.x > 0 && !(playerPosition.x - 1 === currentRoom.x && playerPosition.y === currentRoom.y && portalFacing === 'east')) playerPosition.x--;
+        if (playerPosition.x > 0) playerPosition.x--;
         break;
+}
+
 }
 
     }
