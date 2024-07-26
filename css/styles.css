@@ -112,29 +112,6 @@ body {
 /* In the future, I want to add the feature that the room the player is currently in glows either red or green based on "complete" status */
 
 
-.portal /* The style for the unique Portal Room. This was a mistake on my part; the Vault Portal appears where a corridor should be,
-        adjacent to the middle room of the grid rather than its own room on the grid. This room will be removed in the future */
-{
-    background-color: gray;
-    border: 2px solid white;
-    position: relative;
-}
-
-.portal::after /* The code to format the Portal icon placed in the Portal Room. This will eventaully be replaced by a simple gif and placed adjacent
-                to the Starting Room in the center of the grid. The red squares seen later in this code are beta versions of that future portal icon */
-{
-    content: '';
-    width: 10px; 
-    height: 20px; 
-    background: linear-gradient(180deg, red, orange, yellow, green, blue, indigo, violet);
-    background-size: 400%;
-    position: absolute;
-    bottom: 4px; 
-    left: 50%;
-    transform: translateX(-50%);
-    border: 3px solid black; 
-}
-
 /* Icon to represent the current location of the Player on the map. Will eventually be replaced with Steve's face.
 In the future, I hope to make the Player Icon customizeable so that it can match the user's Minecraft Skin */
 .player {
@@ -165,26 +142,9 @@ In the future, I hope to make the Player Icon customizeable so that it can match
     border-radius: 5px;
 }
 #completion-toggle:hover {
-    background-image: linear-gradient(90deg, #FF0000 0%, black 50%, #008000 100%) /* Simple red to green gradient */
+    background-image: linear-gradient(0deg, #FF0000 0%, #008000 100%) /* Simple red to green gradient */
 }
 
-
-/* Not entirely sure what this bit is for  */
-.portal-room {
-    position: relative;
-}
-
-
-@keyframes rainbowCycle {
-    0% { background-color: red; }
-    14.28% { background-color: orange; }
-    28.56% { background-color: yellow; }
-    42.84% { background-color: green; }
-    57.12% { background-color: blue; }
-    71.40% { background-color: indigo; }
-    85.68% { background-color: violet; }
-    100% { background-color: red; }
-}
 
 
 
