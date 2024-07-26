@@ -115,7 +115,7 @@ body {
 .portal /* The style for the unique Portal Room. This was a mistake on my part; the Vault Portal appears where a corridor should be,
         adjacent to the middle room of the grid rather than its own room on the grid. This room will be removed in the future */
 {
-    background-color: gray;
+    background-color: transparent;
     border: 2px solid white;
     position: relative;
 }
